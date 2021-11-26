@@ -32,6 +32,7 @@ let dummy = {
       recCont: "네 번째 레시피 설명 레시피 설명 레시피 설명 레시피 설명 ",
     },
   ],
+  menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
 };
 const RecipeDetail = () => {
   return (
@@ -47,6 +48,7 @@ const RecipeDetail = () => {
           imgWidth={dummy.imgWidth}
           imgHeight={dummy.imgHeight}
           menuData={dummy.menuData}
+          menuTag={dummy.menuTag}
         />
       </section>
     </Layout>

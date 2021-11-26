@@ -7,6 +7,7 @@ const ListItem = ({
   menuNm,
   menuDate,
   menuId,
+  menuTag,
 }) => {
   return (
     <Link href={`/recipe/recipeDetail?menuId=${menuId}`}>
@@ -23,6 +24,11 @@ const ListItem = ({
               height={imgHeight}
               alt={menuNm}
             />
+            <ul className="list-tag">
+              {menuTag.map((row, idx) => {
+                return <li key={idx}>#{row}</li>;
+              })}
+            </ul>
           </dd>
         </dl>
       </a>

@@ -12,6 +12,7 @@ const dummy = [
     menuNm: "비빔국수",
     menuDate: 4,
     menuId: "1",
+    menuTag: ["백주부", "주말", "파티 요리", "별미"],
   },
   {
     imgSrc: "/images/stock/menu02.webp",
@@ -20,6 +21,7 @@ const dummy = [
     menuNm: "떡복이",
     menuDate: 7,
     menuId: "2",
+    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
   },
   {
     imgSrc: "/images/stock/menu03.webp",
@@ -28,6 +30,34 @@ const dummy = [
     menuNm: "보쌈",
     menuDate: 3,
     menuId: "3",
+    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
+  },
+  {
+    imgSrc: "/images/stock/menu01.webp",
+    imgWidth: 300,
+    imgHeight: 200,
+    menuNm: "비빔국수",
+    menuDate: 6,
+    menuId: "1",
+    menuTag: ["백주부", "주말", "파티 요리", "별미"],
+  },
+  {
+    imgSrc: "/images/stock/menu02.webp",
+    imgWidth: 300,
+    imgHeight: 200,
+    menuNm: "떡복이",
+    menuDate: 2,
+    menuId: "2",
+    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
+  },
+  {
+    imgSrc: "/images/stock/menu03.webp",
+    imgWidth: 300,
+    imgHeight: 200,
+    menuNm: "보쌈",
+    menuDate: 1,
+    menuId: "3",
+    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
   },
   {
     imgSrc: "/images/stock/menu01.webp",
@@ -36,6 +66,7 @@ const dummy = [
     menuNm: "비빔국수",
     menuDate: 4,
     menuId: "1",
+    menuTag: ["백주부", "주말", "파티 요리", "별미"],
   },
   {
     imgSrc: "/images/stock/menu02.webp",
@@ -44,6 +75,7 @@ const dummy = [
     menuNm: "떡복이",
     menuDate: 7,
     menuId: "2",
+    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
   },
   {
     imgSrc: "/images/stock/menu03.webp",
@@ -52,30 +84,7 @@ const dummy = [
     menuNm: "보쌈",
     menuDate: 3,
     menuId: "3",
-  },
-  {
-    imgSrc: "/images/stock/menu01.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "비빔국수",
-    menuDate: 4,
-    menuId: "1",
-  },
-  {
-    imgSrc: "/images/stock/menu02.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "떡복이",
-    menuDate: 7,
-    menuId: "2",
-  },
-  {
-    imgSrc: "/images/stock/menu03.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "보쌈",
-    menuDate: 3,
-    menuId: "3",
+    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
   },
 ];
 const RecipeList = () => {
@@ -95,6 +104,7 @@ const RecipeList = () => {
                 menuNm={row.menuNm}
                 menuDate={row.menuDate}
                 menuId={row.menuId}
+                menuTag={row.menuTag}
                 key={idx}
               />
             );

@@ -8,6 +8,7 @@ const ListDetail = ({
   menuNm,
   menuDate,
   menuData,
+  menuTag,
 }) => {
   return (
     <div className="cont-detail">
@@ -17,6 +18,11 @@ const ListDetail = ({
       >
         <h2 className="header-tit">{menuNm}</h2>
         <p className="header-info">+{menuDate} days ago</p>
+        <ul className="header-tag">
+          {menuTag.map((row, idx) => {
+            return <li key={idx}>#{row}</li>;
+          })}
+        </ul>
       </header>
       <div className="detail-body">
         {menuData.map((row, idx) => {
