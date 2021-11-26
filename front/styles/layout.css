@@ -145,3 +145,23 @@
   color: #fff;
   font-weight: bold;
 }
+
+/* main styles */
+.main-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  height: 400px;
+}
+.main-top .list-item {
+  margin: 0;
+  width: 80vw;
+  border-radius: 0;
+}
+.main-top .list-item dd {
+  height: 360px;
+}
+.main-top .list-item dd:hover img {
+  transform: scale(1);
+}
