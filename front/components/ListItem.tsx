@@ -14,7 +14,7 @@ const ListItem = ({
         <dl className="list-item">
           <dt>
             <strong className="tit-item">{menuNm}</strong>
-            <span className="info-item">+ {menuDate}day</span>
+            <span className="info-item">+ {menuDate}days ago</span>
           </dt>
           <dd>
             <Image
