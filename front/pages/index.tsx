@@ -5,6 +5,8 @@ import styles from "../styles/Home.module.css";
 import Layout, { siteTitle } from "../components/Layout";
 import ListItem from "../components/ListItem";
 import _ from "lodash";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const dummy = [
   {
@@ -90,6 +92,20 @@ const dummy = [
   },
 ];
 const Home: NextPage = () => {
+  let url = "/api/mock/recipeList";
+  const [menuData, setMenuData] = useState([]);
+  const getData = () => {
+    axios
+      .get(url)
+      .then((res) => {
+        console.log("res", res);
+        // setMenuData(res.result.data)
+      })
+      .catch((err) => {});
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   let sortInfo, topInfo, btmInfo;
   sortInfo = _.reverse(_.sortBy(dummy, "menuDate"));
   topInfo = _.slice(sortInfo, 0, 3);
@@ -101,7 +117,7 @@ const Home: NextPage = () => {
         <title>{siteTitle}</title>
       </Head>
       <div className="main-top">
-        {topInfo.map((row, idx) => {
+        {/* {topInfo.map((row, idx) => {
           return (
             <ListItem
               imgSrc={row.imgSrc}
@@ -115,7 +131,7 @@ const Home: NextPage = () => {
               key={idx}
             />
           );
-        })}
+        })} */}
       </div>
       {/* <div className="main-bottom">
         {btmInfo.map((row, idx) => {
