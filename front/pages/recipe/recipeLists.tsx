@@ -6,7 +6,6 @@ import ListItem from "../../components/ListItem";
 import _ from "lodash";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import moment from "moment";
 
 const RecipeList = () => {
   let url = "/api/mock/recipeList";
@@ -21,11 +20,6 @@ const RecipeList = () => {
       .catch((err) => {
         console.log("error", err);
       });
-  };
-  const calcDday = (date: number) => {
-    let toDay = moment();
-    let dDay = toDay.diff(date, "days");
-    return dDay;
   };
   useEffect(() => {
     getData();
