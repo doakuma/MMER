@@ -21,7 +21,12 @@ const ListItem = ({ listData = {} }) => {
               alt={_.get(listData, "menuNm")}
               // layout={isHome ? "responsive" : "fixed"}
               layout="responsive"
+              objectFit="cover"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL={_.get(listData, "imgSrc")}
             />
+            <span className="userIcon"></span>
           </dt>
           <dd className="info-head">
             <strong className="tit-item">{_.get(listData, "menuNm")}</strong>

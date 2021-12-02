@@ -8,7 +8,7 @@ const recipeList = (req: any, res: any): any => {
           /*   {
             imgSrc: "/images/stock/menu01.webp", // 요리 이미지
             imgWidth: 300, // width
-            imgHeight: 200, // height
+            imgHeight: 400, // height
             menuNm: "", // 요리 이름
             // menuDate: 0,
             menuId: "1", // 요리 아이디
@@ -34,7 +34,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu01.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "비빔국수",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -57,7 +57,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu02.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "떡볶이",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -80,7 +80,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu03.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "보쌈",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -103,7 +103,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu01.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "비빔국수",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -126,7 +126,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu02.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "떡볶이",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -149,7 +149,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu03.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "보쌈",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -172,7 +172,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu01.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "비빔국수",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -195,7 +195,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu02.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "떡볶이",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -218,7 +218,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu03.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "보쌈",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -241,7 +241,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu01.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "비빔국수",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -264,7 +264,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu02.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "떡볶이",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
@@ -287,7 +287,7 @@ const recipeList = (req: any, res: any): any => {
           {
             imgSrc: "/images/stock/menu03.webp",
             imgWidth: 300,
-            imgHeight: 200,
+            imgHeight: 400,
             menuNm: "보쌈",
             menuId: "1",
             menuTag: ["백주부", "주말", "파티 요리", "별미"],
