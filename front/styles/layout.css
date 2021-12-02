@@ -2,6 +2,7 @@
 }
 .header {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid #e4e8ef;
 }
 .cont-section {
@@ -216,4 +217,25 @@
 }
 .main-top .list-item dd:hover img {
   transform: scale(1);
+}
+/* gnb */
+.menu-gnb {
+  margin: 0 0 0 20px;
+}
+.menu-gnb ul {
+  display: flex;
+  align-items: center;
+}
+.btn-gnb {
+  margin: 0 10px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+.btn-gnb:hover {
+  background: #e4e8ef;
+}
+.btn-gnb.active {
+  background: #e4e8ef;
 }

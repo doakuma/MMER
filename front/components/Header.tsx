@@ -11,6 +11,20 @@ const Header = () => {
           </h1>
         </a>
       </Link>
+      <nav className="menu-gnb">
+        <ul>
+          <li>
+            <Link href="/recipe/recipeLists">
+              <a className="btn-gnb active">Recipe List</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/">
+              <a className="btn-gnb">Pantry</a>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };
