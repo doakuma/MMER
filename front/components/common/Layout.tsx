@@ -5,9 +5,12 @@ import Link from "next/link";
 import Header from "./Header";
 
 const name = "Your Name";
-export const siteTitle = "MMER Test Site";
+// export const siteTitle = "MMER Test Site";
 
-const Layout = ({ children, home }) => {
+const Layout = (props: any) => {
+  let children = props.children;
+  let home = props.home;
+  let siteTitle = props.siteTitle;
   return (
     <div className="wrapper">
       <Head>

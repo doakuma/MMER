@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import Layout, { siteTitle } from "../../components/Layout";
-import ListDetailMenuInfo from "../../components/ListDetailMenuInfo";
-import ListDetaiIngrInfo from "../../components/ListDetaiIngrInfo";
-import ListDetailRecipeInfo from "../../components/ListDetailRecipeInfo";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Layout, { siteTitle } from "../../components/common/Layout";
+import ListDetailMenuInfo from "../../components/recipe/ListDetailMenuInfo";
+import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
+import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
 
-const RecipeDetail = () => {
+function RecipeDetail() {
   let url = "/api/mock/recipeDetail";
   const [menuData, setMenuData] = useState({});
   const [menuIngr, setMenuIngr] = useState([]);
@@ -54,5 +54,5 @@ const RecipeDetail = () => {
       </section>
     </Layout>
   );
-};
+}
 export default RecipeDetail;

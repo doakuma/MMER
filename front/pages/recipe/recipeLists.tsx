@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import Layout, { siteTitle } from "../../components/Layout";
-import ListItem from "../../components/ListItem";
+import Layout, { siteTitle } from "../../components/common/Layout";
+import ListItem from "../../components/recipe/ListItem";
 import _ from "lodash";
 import axios from "axios";
 import { useEffect, useState } from "react";
