@@ -2,8 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Layout, { siteTitle } from "../components/Layout";
-import ListItem from "../components/ListItem";
+import Layout from "../components/common/Layout";
 import _ from "lodash";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -112,10 +111,7 @@ const Home: NextPage = () => {
   btmInfo = _.slice(sortInfo, 3, sortInfo.length);
   console.info("topInfo", btmInfo, topInfo);
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <Layout home siteTitle="main">
       <div className="main-top">
         {/* {topInfo.map((row, idx) => {
           return (

@@ -19,7 +19,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/pantry/pantryLists">
               <a className="btn-gnb">Pantry</a>
             </Link>
           </li>

@@ -3,10 +3,11 @@ import Image from "next/image";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Layout, { siteTitle } from "../../components/common/Layout";
+import Layout from "../../components/common/Layout";
 import ListDetailMenuInfo from "../../components/recipe/ListDetailMenuInfo";
 import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
 import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
+import _ from "lodash";
 
 function RecipeDetail() {
   let url = "/api/mock/recipeDetail";
@@ -32,10 +33,8 @@ function RecipeDetail() {
   }, []);
 
   return (
-    <Layout home={false}>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <Layout home={false} siteTitle="recipe details">
+      <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
         <div className="cont-detail">
           <div className="detail-left">
