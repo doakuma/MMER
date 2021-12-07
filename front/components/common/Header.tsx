@@ -15,7 +15,7 @@ const Header = () => {
         <ul>
           <li>
             <Link href="/recipe/recipeLists">
-              <a className="btn-gnb active">Recipe List</a>
+              <a className="btn-gnb active">Recipe</a>
             </Link>
           </li>
           <li>

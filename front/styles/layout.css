@@ -282,15 +282,31 @@
   align-items: center;
 }
 .btn-gnb {
+  position: relative;
   margin: 0 10px;
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
-  transition: background 0.15s;
+  transition: color 0.15s;
 }
-.btn-gnb:hover {
-  background: #e4e8ef;
+.btn-gnb:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  margin: auto;
+  background: #f0d616;
+  width: 0;
+  height: 6px;
+  transition: width 0.15s;
 }
+.btn-gnb:hover,
 .btn-gnb.active {
-  background: #e4e8ef;
+  color: #f0d616;
+}
+
+.btn-gnb:hover:after,
+.btn-gnb.active:after {
+  width: 100%;
 }
