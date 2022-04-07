@@ -9,15 +9,22 @@ import { useEffect, useState } from "react";
 
 const RecipeList = () => {
   let url = "/api/mock/recipeList";
+  let _url = "http://localhost:1337/api/recipes";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
     axios
-      .get(url)
-      .then((res) => {
-        let resData = _.get(res, "data.result.data");
+      .get(_url)
+      .then((res: any) => {
+        let resData = _.get(res, "data.data");
+        let _resData = _.chain(resData)
+          .map((row, idx) => {
+            console.log("chain", row);
+          })
+          .value();
+        console.log("data", _.get(res, "data.data"));
         setMenuData(resData);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log("error", err);
       });
   };

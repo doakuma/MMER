@@ -9,44 +9,57 @@ const ListItem = ({ listData = {} }) => {
     let dDay = toDay.diff(date, "days");
     return dDay;
   };
+  // return <div></div>;
   return (
-    <Link href={`/recipe/recipeDetail?menuId=${_.get(listData, "menuId")}`}>
+    <Link
+      href={`/recipe/recipeDetail?menuId=${_.get(
+        listData,
+        "attributes.menuId"
+      )}`}
+    >
       <a className="list-item">
         <dl>
           <dt>
-            <Image
-              src={_.get(listData, "imgSrc")}
-              width={_.get(listData, "imgWidth")}
-              height={_.get(listData, "imgHeight")}
-              alt={_.get(listData, "menuNm")}
+            {/* <Image
+              src={_.get(listData, "attributes.imgSrc")}
+              width={_.get(listData, "attributes.imgWidth")}
+              height={_.get(listData, "attributes.imgHeight")}
+              alt={_.get(listData, "attributes.menuNm")}
               // layout={isHome ? "responsive" : "fixed"}
               layout="responsive"
               objectFit="cover"
               loading="lazy"
               placeholder="blur"
-              blurDataURL={_.get(listData, "imgSrc")}
-            />
+              blurDataURL={_.get(listData, "attributes.imgSrc")}
+            /> */}
             <span className="userIcon"></span>
           </dt>
           <dd className="info-head">
-            <strong className="tit-item">{_.get(listData, "menuNm")}</strong>
+            <strong className="tit-item">
+              {_.get(listData, "attributes.menuNm")}
+            </strong>
             <span className="info-item">
-              {calcDday(_.get(listData, "lastCookDate"))} days ago
+              {calcDday(_.get(listData, "attributes.lastCookDate"))} days ago
             </span>
           </dd>
-          <dd>
-            <ul className="list-tag">
-              {_.get(listData, "menuTag").map((row: any, idx: number) => {
-                return <li key={idx}>#{row}</li>;
-              })}
-            </ul>
-          </dd>
+          {_.isArray(_.get(listData, "attributes.menuTag")) && (
+            <dd>
+              <ul className="list-tag">
+                {_.get(listData, "attributes.menuTag").map(
+                  (row: any, idx: number) => {
+                    return <li key={idx}>#{row}</li>;
+                  }
+                )}
+              </ul>
+            </dd>
+          )}
+
           <dd className="info-addtl">
             <strong className="item-difc">
-              {_.get(listData, "menuDifct")}
+              {_.get(listData, "attributes.menuDifct")}
             </strong>
             <span className="item-reqTime">
-              {_.get(listData, "menuReqTime")}
+              {_.get(listData, "attributes.menuReqTime")}
             </span>
           </dd>
         </dl>
