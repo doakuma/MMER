@@ -32,19 +32,7 @@ const Home: NextPage = () => {
     <Layout home siteTitle="main">
       <div className="main-top">
         {topInfo.map((row, idx) => {
-          return (
-            <ListItem
-              imgSrc={_.get(row, "imgSrc")}
-              imgWidth={_.get(row, "imgWidth")}
-              imgHeight={_.get(row, "imgHeight")}
-              menuNm={_.get(row, "menuNm")}
-              menuDate={_.get(row, "menuDate")}
-              menuId={_.get(row, "menuId")}
-              menuTag={_.get(row, "menuTag")}
-              isHome={true}
-              key={idx}
-            />
-          );
+          return <ListItem {...row} key={idx} />;
         })}
       </div>
       {/* <div className="main-bottom">

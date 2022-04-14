@@ -4,6 +4,7 @@ import _ from "lodash";
 import moment from "moment";
 
 export interface IListItems {
+  id?: string;
   imgSrc?: string;
   imgWidth?: string;
   imgHeight?: string;
@@ -21,22 +22,27 @@ const ListItem = (listData: IListItems) => {
     return dDay;
   };
   return (
-    <Link href={`/recipe/recipeDetail?menuId=${_.get(listData, "id")}`}>
+    <Link
+      href={`/recipe/${_.get(listData, "id")}`}
+      as={`/recipe/${_.get(listData, "menuNm")}`}
+    >
       <a className="list-item">
         <dl>
           <dt>
-            <img
-              src={_.get(listData, "imgSrc")}
-              width={_.get(listData, "imgWidth")}
-              height={_.get(listData, "imgHeight")}
-              alt={_.get(listData, "menuNm")}
-              // layout={isHome ? "responsive" : "fixed"}
-              // layout="responsive"
-              // objectFit="cover"
-              // loading="lazy"
-              // placeholder="blur"
-              // blurDataURL={_.get(listData, "imgSrc")}
-            />
+            <span className="wrapImg">
+              <img
+                src={_.get(listData, "imgSrc")}
+                // width={_.get(listData, "imgWidth")}
+                // height={_.get(listData, "imgHeight")}
+                alt={_.get(listData, "menuNm")}
+                // layout={isHome ? "responsive" : "fixed"}
+                // layout="responsive"
+                // objectFit="cover"
+                // loading="lazy"
+                // placeholder="blur"
+                // blurDataURL={_.get(listData, "imgSrc")}
+              />
+            </span>
             <span className="userIcon"></span>
           </dt>
           <dd className="info-head">
