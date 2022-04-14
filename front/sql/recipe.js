@@ -6,6 +6,8 @@ export async function getLists() {
       query: `
       SELECT * 
         FROM recipe_list
+        ORDER BY menuNm DESC
+        LIMIT 0, 10
       `,
       values: [],
     });
