@@ -273,9 +273,10 @@
 .main-top .list-item .wrapImg {
   display: block;
   overflow: hidden;
+  height: 300px;
 }
 .main-top .list-item dt img {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 }

@@ -32,8 +32,8 @@ const ListItem = (listData: IListItems) => {
             <span className="wrapImg">
               <img
                 src={_.get(listData, "imgSrc")}
-                // width={_.get(listData, "imgWidth")}
-                // height={_.get(listData, "imgHeight")}
+                width={_.get(listData, "imgWidth")}
+                height={_.get(listData, "imgHeight")}
                 alt={_.get(listData, "menuNm")}
                 // layout={isHome ? "responsive" : "fixed"}
                 // layout="responsive"

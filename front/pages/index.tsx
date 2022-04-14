@@ -25,7 +25,8 @@ const Home: NextPage = () => {
   }, []);
   let sortInfo, topInfo, btmInfo;
   // sortInfo = _.reverse(_.sortBy(dummy, "menuDate"));
-  topInfo = _.slice(menuData, 0, 3);
+  // topInfo = _.slice(menuData, 0, 3);
+  topInfo = menuData;
   // btmInfo = _.slice(sortInfo, 3, sortInfo.length);
   console.info("topInfo", topInfo);
   return (
