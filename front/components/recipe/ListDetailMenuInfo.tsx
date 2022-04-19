@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 const ListDetailMenuInfo = (props: any) => {
   const [menuInfo, setMenuInfo] = useState({});
   useEffect(() => {
-    setMenuInfo(_.get(props, "menuInfo"));
+    // setMenuInfo(_.get(props, "menuInfo"));
+    setMenuInfo(_.get(props, "data"));
   }, [props]);
   const calcDday = (date: number) => {
     let toDay = moment();
@@ -24,9 +25,11 @@ const ListDetailMenuInfo = (props: any) => {
       </p>
       {!_.isEmpty(_.get(menuInfo, "menuTag")) && (
         <ul className="header-tag">
-          {_.get(menuInfo, "menuTag").map((row: any, idx: number) => {
+          {/* {_.get(menuInfo, "menuTag").map((row: any, idx: number) => {
             return <li key={idx}>#{row}</li>;
-          })}
+          })} */}
+
+          <li>#{_.get(menuInfo, "menuTag")}</li>
         </ul>
       )}
     </header>

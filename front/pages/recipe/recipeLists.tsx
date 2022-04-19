@@ -33,7 +33,7 @@ const RecipeList = () => {
           {!_.isEmpty(menuData) &&
             menuData.map((row, idx) => {
               console.log("menuData", row);
-              return <ListItem listData={row} key={idx} />;
+              return <ListItem {...row} key={idx} />;
             })}
         </div>
         {/* <Link href="/recipe/recipeDetail">

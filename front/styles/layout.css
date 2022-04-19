@@ -30,6 +30,11 @@
   padding: 0 0 10px;
   margin: -10px -10px 0;
 }
+.list-item .wrapImg {
+  display: block;
+  overflow: hidden;
+  height: 300px;
+}
 .list-item dt img {
   transition: all 0.35s;
 }
@@ -274,11 +279,6 @@
   /* border-radius: 0; */
 }
 .main-top .list-item dt {
-}
-.main-top .list-item .wrapImg {
-  display: block;
-  overflow: hidden;
-  height: 300px;
 }
 .main-top .list-item dt img {
   object-fit: cover;

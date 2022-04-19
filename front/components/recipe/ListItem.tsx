@@ -24,7 +24,7 @@ const ListItem = (listData: IListItems) => {
   return (
     <Link
       href={`/recipe/${_.get(listData, "id")}`}
-      as={`/recipe/${_.get(listData, "menuNm")}`}
+      // as={`/recipe/${_.get(listData, "menuNm")}`}
     >
       <a className="list-item">
         <dl>
@@ -43,7 +43,15 @@ const ListItem = (listData: IListItems) => {
                 // blurDataURL={_.get(listData, "imgSrc")}
               />
             </span>
-            <span className="userIcon"></span>
+            <span
+              className="userIcon"
+              style={{
+                backgroundImage: `url(${_.get(listData, "userInfo")})`,
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            ></span>
           </dt>
           <dd className="info-head">
             <strong className="tit-item">{_.get(listData, "menuNm")}</strong>
@@ -54,9 +62,10 @@ const ListItem = (listData: IListItems) => {
           {!_.isEmpty(_.get(listData, "menuTag")) && (
             <dd>
               <ul className="list-tag">
-                {_.get(listData, "menuTag").map((row: any, idx: number) => {
+                {/* {_.get(listData, "menuTag").map((row: any, idx: number) => {
                   return <li key={idx}>#{row}</li>;
-                })}
+                })} */}
+                <li>#{_.get(listData, "menuTag")}</li>
               </ul>
             </dd>
           )}
