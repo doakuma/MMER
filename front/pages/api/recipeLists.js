@@ -4,7 +4,7 @@ import excuteQuery from "../../db";
 import _ from "lodash";
 
 export default async function handler(req, res) {
-  console.log("req", req);
+  // console.log("req", req);
   if (req.method !== "GET") res.status(405);
 
   let props = {};

@@ -21,6 +21,11 @@ const ListItem = (listData: IListItems) => {
     let dDay = toDay.diff(date, "days");
     return dDay;
   };
+  const calcDifc = () => {
+    let _difc;
+    _difc = _.get(listData, "menuDifct") * 20;
+    return _difc;
+  };
   return (
     <Link
       href={`/recipe/${_.get(listData, "id")}`}
@@ -71,10 +76,13 @@ const ListItem = (listData: IListItems) => {
           )}
           <dd className="info-addtl">
             <strong className="item-difc">
-              {_.get(listData, "menuDifct")}
+              <span
+                className="difc-meter"
+                style={{ width: calcDifc() + "%" }}
+              ></span>
             </strong>
             <span className="item-reqTime">
-              {_.get(listData, "menuReqTime")}
+              {_.get(listData, "menuReqTime")}Min
             </span>
           </dd>
         </dl>
