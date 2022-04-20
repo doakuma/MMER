@@ -8,7 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const RecipeList = () => {
-  let url = "/api/recipe/getList";
+  let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
     axios

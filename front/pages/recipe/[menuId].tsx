@@ -15,7 +15,8 @@ function RecipeDetail() {
   const [menuData, setMenuData] = useState({});
   const [menuIngr, setMenuIngr] = useState([]);
   const [recipeData, setRecipeData] = useState({});
-  let url = `/api/recipe/getData`;
+  let url = `/api/recipe/getRecipe`;
+  let removeUrl = `/api/recipe/removeRecipe`;
   let params = {
     id: query.menuId,
   };
@@ -34,6 +35,17 @@ function RecipeDetail() {
       })
       .catch((err) => {
         console.log("error", err);
+      });
+  };
+  const removeData = (e) => {
+    e.preventDefault();
+    axios
+      .post(removeUrl, { params })
+      .then((res) => {
+        console.log("removeData", res);
+      })
+      .catch((err) => {
+        console.log("err", err);
       });
   };
   useEffect(() => {
@@ -57,6 +69,7 @@ function RecipeDetail() {
           <Link href="/recipe/recipeLists">
             <a className="btn primary">리스트 보기</a>
           </Link>
+          <button onClick={(e) => removeData(e)}>메뉴 삭제</button>
         </div>
       </section>
     </Layout>

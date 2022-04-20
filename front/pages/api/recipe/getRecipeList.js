@@ -13,7 +13,6 @@ export default async function handler(req, res) {
       query: `
       SELECT * 
         FROM recipe_list
-        LIMIT 0, 10
       `,
       values: [],
     });

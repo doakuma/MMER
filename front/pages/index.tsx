@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import ListItem from "../components/recipe/ListItem";
 
 const Home: NextPage = () => {
-  let url = "/api/recipe/getList";
+  let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
     axios
