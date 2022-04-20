@@ -15,7 +15,7 @@ function RecipeDetail() {
   const [menuData, setMenuData] = useState({});
   const [menuIngr, setMenuIngr] = useState([]);
   const [recipeData, setRecipeData] = useState({});
-  let url = `/api/recipeDetail`;
+  let url = `/api/recipe/getData`;
   let params = {
     id: query.menuId,
   };
