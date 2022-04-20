@@ -4,13 +4,13 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import axios from "axios";
-import Layout from "../../components/common/Layout";
-import ListDetailMenuInfo from "../../components/recipe/ListDetailMenuInfo";
-import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
-import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
+import Layout from "../../../components/common/Layout";
+import ListDetailMenuInfo from "../../../components/recipe/ListDetailMenuInfo";
+import ListDetaiIngrInfo from "../../../components/recipe/ListDetaiIngrInfo";
+import ListDetailRecipeInfo from "../../../components/recipe/ListDetailRecipeInfo";
 import _, { now } from "lodash";
 
-export interface IRegist {
+export interface IModify {
   imgSrc: string;
   imgWidth: number;
   imgeHeight: number;
@@ -21,10 +21,36 @@ export interface IRegist {
   menuReqTime: string;
   userInfo: string;
   menuTag: string;
+  id: string;
 }
-function recipeRegist() {
-  let url = `/api/recipe/registRecipe`;
+function recipeModify() {
+  const { query, pathname } = useRouter();
+  const [menuData, setMenuData] = useState({});
+  let _geturl = `/api/recipe/getRecipe`;
   let params = {
+    id: _.get(query, "modifyId"),
+  };
+  console.log("props", params, query);
+  const getData = async () => {
+    await axios
+      .get(_geturl, { params })
+      .then((res) => {
+        console.log("getDetails", res);
+        let resData = _.get(res, "data.result.data");
+        setMenuData(resData);
+        // setMenuData(_.get(resData, "menuData"));
+        // setMenuIngr(_.get(resData, "menuIngr"));
+        // setRecipeData(_.get(resData, "recipeData"));
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+  useEffect(() => {
+    if (params.id) getData();
+  }, [params.id]);
+  let url = `/api/recipe/registRecipe`;
+  let initparams = {
     imgSrc: "",
     imgWidth: "",
     imgeHeight: "",
@@ -35,20 +61,9 @@ function recipeRegist() {
     menuReqTime: "",
     userInfo: "",
     menuTag: "",
+    id: "",
   };
-  let testParams = {
-    imgSrc: "/images/stock/menu08.jpg",
-    imgWidth: 400,
-    imgeHeight: 300,
-    menuNm: "누구냐 넌",
-    mealType: "태국요리",
-    lastCookDate: "2022-03-31",
-    menuDifct: "3",
-    menuReqTime: "60",
-    userInfo: "/images/user/@userIcon.png",
-    menuTag: "주말",
-  };
-  const [inputs, setInputs] = useState(testParams);
+  const [inputs, setInputs] = useState(initparams);
 
   const registData = async (e) => {
     e.preventDefault();
@@ -85,11 +100,12 @@ function recipeRegist() {
       menuReqTime: inputs.menuReqTime,
       userInfo: inputs.userInfo,
       menuTag: inputs.menuTag,
+      id: "",
     };
     await axios
       .post(url, { params })
       .then((res) => {
-        console.log("registData", res);
+        console.log("modifyData", res);
       })
       .catch((err) => {
         console.log("err", err);
@@ -195,4 +211,4 @@ function recipeRegist() {
     </Layout>
   );
 }
-export default recipeRegist;
+export default recipeModify;

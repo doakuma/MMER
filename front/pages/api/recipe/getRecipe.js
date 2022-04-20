@@ -8,7 +8,8 @@ export default async function handler(req, res) {
   const { id } = req.query;
   console.log(
     "req==============================================================",
-    req.query
+    req.query,
+    id
   );
 
   let props = {};
@@ -16,7 +17,7 @@ export default async function handler(req, res) {
     const result = await excuteQuery({
       query: `
       SELECT * 
-        FROM recipe_detail
+        FROM recipe_list
         WHERE id = ?
       `,
       values: [id],

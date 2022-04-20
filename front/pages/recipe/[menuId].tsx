@@ -22,8 +22,8 @@ function RecipeDetail() {
   };
 
   console.log("props", params);
-  const getData = () => {
-    axios
+  const getData = async () => {
+    await axios
       .get(url, { params })
       .then((res) => {
         console.log("getDetails", res);
@@ -37,9 +37,9 @@ function RecipeDetail() {
         console.log("error", err);
       });
   };
-  const removeData = (e) => {
+  const removeData = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(removeUrl, { params })
       .then((res) => {
         console.log("removeData", res);
@@ -68,6 +68,9 @@ function RecipeDetail() {
         <div className="btn-area md">
           <Link href="/recipe/recipeLists">
             <a className="btn primary">리스트 보기</a>
+          </Link>
+          <Link href="/recipe/recipeLists">
+            <a className="btn primary">메뉴 수정</a>
           </Link>
           <button onClick={(e) => removeData(e)}>메뉴 삭제</button>
         </div>

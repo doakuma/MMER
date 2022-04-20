@@ -4,26 +4,54 @@ import excuteQuery from "../../../db";
 import _ from "lodash";
 
 export default async function handler(req, res) {
-  if (req.method !== "GET") res.status(405);
-  const { id } = req.query;
+  if (req.method !== "POST") res.status(405);
+  const {
+    imgSrc,
+    imgWidth,
+    imgeHeight,
+    menuNm,
+    mealType,
+    lastCookDate,
+    menuDifct,
+    menuReqTime,
+    userInfo,
+    menuTag,
+    id,
+  } = req.body.params;
   console.log(
     "req==============================================================",
-    req.query
+    req.body,
+    imgSrc
   );
 
   let props = {};
   try {
     const result = await excuteQuery({
       query: `
-      UPDATE * 
-        FROM recipe_detail
+      UPDATE
+        recipe_list
+        (imgSrc, imgWidth, imgHeight, menuNm, mealType, lastCookDate, menuDifct, menuReqTime, userInfo, menuTag)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         WHERE id = ?
+
       `,
-      values: [id],
+      values: [
+        imgSrc,
+        imgWidth,
+        imgeHeight,
+        menuNm,
+        mealType,
+        lastCookDate,
+        menuDifct,
+        menuReqTime,
+        userInfo,
+        menuTag,
+        id,
+      ],
     });
     // return result;
     // console.log("props", result);
-    _.set(props, "result.data", result[0]);
+    _.set(props, "result", result);
   } catch (error) {
     console.log(error);
   }
