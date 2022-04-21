@@ -69,7 +69,7 @@ function RecipeDetail() {
           <Link href="/recipe/recipeLists">
             <a className="btn primary">리스트 보기</a>
           </Link>
-          <Link href="/recipe/recipeLists">
+          <Link href={`/recipe/modify/${params.id}`}>
             <a className="btn primary">메뉴 수정</a>
           </Link>
           <button onClick={(e) => removeData(e)}>메뉴 삭제</button>

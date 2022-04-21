@@ -49,61 +49,29 @@ function recipeModify() {
   useEffect(() => {
     if (params.id) getData();
   }, [params.id]);
-  let url = `/api/recipe/registRecipe`;
-  let initparams = {
-    imgSrc: "",
-    imgWidth: "",
-    imgeHeight: "",
-    menuNm: "",
-    mealType: "",
-    lastCookDate: now(),
-    menuDifct: 1,
-    menuReqTime: "",
-    userInfo: "",
-    menuTag: "",
-    id: "",
-  };
-  const [inputs, setInputs] = useState(initparams);
+  useEffect(() => {
+    setInputs(initparams);
+  }, [menuData]);
 
-  const registData = async (e) => {
-    e.preventDefault();
-    const params = {
-      imgSrc: inputs.imgSrc,
-      imgWidth: inputs.imgWidth,
-      imgeHeight: inputs.imgeHeight,
-      menuNm: inputs.menuNm,
-      mealType: inputs.mealType,
-      lastCookDate: inputs.lastCookDate,
-      menuDifct: inputs.menuDifct,
-      menuReqTime: inputs.menuReqTime,
-      userInfo: inputs.userInfo,
-      menuTag: inputs.menuTag,
-    };
-    await axios
-      .post(url, { params })
-      .then((res) => {
-        console.log("registData", res);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+  let url = `/api/recipe/registRecipe`;
+  let modurl = `/api/recipe/modifyRecipe`;
+  let initparams = {
+    imgSrc: _.get(menuData, "imgSrc"),
+    imgWidth: _.get(menuData, "imgWidth"),
+    imgeHeight: _.get(menuData, "imgHeight"),
+    menuNm: _.get(menuData, "menuNm"),
+    mealType: _.get(menuData, "mealType"),
+    lastCookDate: _.get(menuData, "lastCookDate"),
+    menuDifct: _.get(menuData, "menuDifct"),
+    menuReqTime: _.get(menuData, "menuReqTime"),
+    userInfo: _.get(menuData, "userInfo"),
+    menuTag: _.get(menuData, "menuTag"),
+    id: _.get(menuData, "id"),
   };
+  const [inputs, setInputs] = useState({});
   const modifyData = async (e) => {
-    const params = {
-      imgSrc: inputs.imgSrc,
-      imgWidth: inputs.imgWidth,
-      imgeHeight: inputs.imgeHeight,
-      menuNm: inputs.menuNm,
-      mealType: inputs.mealType,
-      lastCookDate: inputs.lastCookDate,
-      menuDifct: inputs.menuDifct,
-      menuReqTime: inputs.menuReqTime,
-      userInfo: inputs.userInfo,
-      menuTag: inputs.menuTag,
-      id: "",
-    };
     await axios
-      .post(url, { params })
+      .post(modurl, { inputs })
       .then((res) => {
         console.log("modifyData", res);
       })
@@ -112,7 +80,7 @@ function recipeModify() {
       });
   };
 
-  const onChange = (e) => {
+  const onChange = (e: any) => {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
@@ -129,7 +97,13 @@ function recipeModify() {
       <section className="cont-section">
         <div>
           <label htmlFor="imgSrc">이미지 경로</label>
-          <input type="text" id="imgSrc" name="imgSrc" onChange={onChange} />
+          <input
+            type="text"
+            id="imgSrc"
+            name="imgSrc"
+            onChange={onChange}
+            defaultValue={_.get(menuData, "imgSrc")}
+          />
         </div>
         <div>
           <label htmlFor="imgWidth">이미지 너비</label>
@@ -138,6 +112,7 @@ function recipeModify() {
             id="imgWidth"
             name="imgWidth"
             onChange={onChange}
+            defaultValue={_.get(menuData, "imgWidth")}
           />
         </div>
         <div>
@@ -147,11 +122,18 @@ function recipeModify() {
             id="imgeHeight"
             name="imgeHeight"
             onChange={onChange}
+            defaultValue={_.get(menuData, "imgHeight")}
           />
         </div>
         <div>
           <label htmlFor="menuNm">메뉴 이름</label>
-          <input type="text" id="menuNm" name="menuNm" onChange={onChange} />
+          <input
+            type="text"
+            id="menuNm"
+            name="menuNm"
+            onChange={onChange}
+            defaultValue={_.get(menuData, "menuNm")}
+          />
         </div>
         <div>
           <label htmlFor="mealType">메뉴 종류</label>
@@ -160,6 +142,7 @@ function recipeModify() {
             id="mealType"
             name="mealType"
             onChange={onChange}
+            defaultValue={_.get(menuData, "mealType")}
           />
         </div>
         <div>
@@ -169,6 +152,7 @@ function recipeModify() {
             id="lastCookDate"
             name="lastCookDate"
             onChange={onChange}
+            defaultValue={_.get(menuData, "lastCookDate")}
           />
         </div>
         <div>
@@ -178,6 +162,7 @@ function recipeModify() {
             id="menuDifct"
             name="menuDifct"
             onChange={onChange}
+            defaultValue={_.get(menuData, "menuDifct")}
           />
         </div>
         <div>
@@ -187,6 +172,7 @@ function recipeModify() {
             id="menuReqTime"
             name="menuReqTime"
             onChange={onChange}
+            defaultValue={_.get(menuData, "menuReqTime")}
           />
         </div>
         <div>
@@ -196,14 +182,21 @@ function recipeModify() {
             id="userInfo"
             name="userInfo"
             onChange={onChange}
+            defaultValue={_.get(menuData, "userInfo")}
           />
         </div>
         <div>
           <label htmlFor="menuTag">메뉴 태그</label>
-          <input type="text" id="menuTag" name="menuTag" onChange={onChange} />
+          <input
+            type="text"
+            id="menuTag"
+            name="menuTag"
+            onChange={onChange}
+            defaultValue={_.get(menuData, "menuTag")}
+          />
         </div>
         <div className="btn-area md">
-          <button onClick={(e) => registData(e)}>메뉴 등록</button>
+          {/* <button onClick={(e) => registData(e)}>메뉴 등록</button> */}
           <button onClick={(e) => modifyData(e)}>메뉴 수정</button>
           <button onClick={onReset}>취소</button>
         </div>

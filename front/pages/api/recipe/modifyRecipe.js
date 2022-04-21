@@ -17,11 +17,11 @@ export default async function handler(req, res) {
     userInfo,
     menuTag,
     id,
-  } = req.body.params;
+  } = req.body.inputs;
   console.log(
     "req==============================================================",
-    req.body,
-    imgSrc
+    req.body.inputs,
+    id
   );
 
   let props = {};
@@ -30,9 +30,18 @@ export default async function handler(req, res) {
       query: `
       UPDATE
         recipe_list
-        (imgSrc, imgWidth, imgHeight, menuNm, mealType, lastCookDate, menuDifct, menuReqTime, userInfo, menuTag)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        WHERE id = ?
+      SET 
+         imgSrc = ?, 
+         imgWidth = ?, 
+         imgHeight = ?, 
+         menuNm = ?, 
+         mealType = ?, 
+         lastCookDate = ?, 
+         menuDifct = ?, 
+         menuReqTime = ?, 
+         userInfo = ?, 
+         menuTag = ?
+      WHERE id = ?
 
       `,
       values: [
