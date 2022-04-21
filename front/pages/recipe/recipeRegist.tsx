@@ -223,7 +223,22 @@ function recipeRegist() {
         <div className="regist regist_ingredient">
           <h2 className="stit-recipe">재료</h2>
           <ul className="list-regist">
-            <li></li>
+            <li>
+              <label className="tit-regist" htmlFor="selIngr">
+                재료 종류
+              </label>
+              <select name="selIngr" id="selIngr" className="text">
+                <option value="">Type</option>
+              </select>
+              <label className="tit-regist" htmlFor="nmIngr">
+                재료 명
+              </label>
+              <input type="text" className="text" id="nmIngr" />
+              <label className="tit-regist" htmlFor="amtIngr">
+                재료 양
+              </label>
+              <input type="text" className="text" id="amtIngr" />
+            </li>
           </ul>
           <div className="btn-area md">
             <button className="btn secondary">재료 추가</button>
@@ -232,7 +247,16 @@ function recipeRegist() {
         <div className="regist regist_source">
           <h2 className="stit-recipe">양념</h2>
           <ul className="list-regist">
-            <li></li>
+            <li>
+              <label className="tit-regist" htmlFor="nmSrcs">
+                양념 명
+              </label>
+              <input type="text" className="text" id="nmSrcs" />
+              <label className="tit-regist" htmlFor="amtSrcs">
+                양념 양
+              </label>
+              <textarea className="text" id="amtSrcs"></textarea>
+            </li>
           </ul>
           <div className="btn-area md">
             <button className="btn secondary">순서 추가</button>
@@ -241,7 +265,12 @@ function recipeRegist() {
         <div className="regist regist_cookseq">
           <h2 className="stit-recipe">조리</h2>
           <ul className="list-regist">
-            <li></li>
+            <li>
+              <label className="tit-regist" htmlFor="cookSeq01">
+                1
+              </label>
+              <input type="text" className="text" id="cookSeq01" />
+            </li>
           </ul>
           <div className="btn-area md">
             <button className="btn secondary">순서 추가</button>
