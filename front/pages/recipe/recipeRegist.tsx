@@ -21,6 +21,7 @@ export interface IRegist {
   menuReqTime: string;
   userInfo: string;
   menuTag: string;
+  cookFreq: number;
 }
 function recipeRegist() {
   let url = `/api/recipe/registRecipe`;
@@ -35,6 +36,7 @@ function recipeRegist() {
     menuReqTime: "",
     userInfo: "",
     menuTag: "",
+    cookFreq: 0,
   };
 
   const [inputs, setInputs] = useState(params);
@@ -47,11 +49,12 @@ function recipeRegist() {
       imgeHeight: inputs.imgeHeight,
       menuNm: inputs.menuNm,
       mealType: inputs.mealType,
-      lastCookDate: inputs.lastCookDate,
+      lastCookDate: inputs.lastCookDate ? inputs.lastCookDate : now(),
       menuDifct: inputs.menuDifct,
       menuReqTime: inputs.menuReqTime,
       userInfo: inputs.userInfo,
       menuTag: inputs.menuTag,
+      cookFreq: inputs.cookFreq,
     };
     await axios
       .post(url, { params })

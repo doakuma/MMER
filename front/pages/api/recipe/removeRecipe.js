@@ -5,10 +5,10 @@ import _ from "lodash";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") res.status(405);
-  const { id } = req.body;
+  const { id } = req.body.params;
   console.log(
     "req==============================================================",
-    req.body
+    req.body.params
   );
 
   let props = {};

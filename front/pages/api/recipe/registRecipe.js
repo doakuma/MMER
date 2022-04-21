@@ -16,6 +16,7 @@ export default async function handler(req, res) {
     menuReqTime,
     userInfo,
     menuTag,
+    cookFreq,
   } = req.body.params;
   console.log(
     "req==============================================================",
@@ -23,28 +24,18 @@ export default async function handler(req, res) {
     imgSrc
   );
 
+  //  (menuNm, mealType, menuDifct, menuReqTime, userInfo, menuTag)
   let props = {};
   try {
     const result = await excuteQuery({
       query: `
       INSERT
         recipe_list
-        (imgSrc, imgWidth, imgHeight, menuNm, mealType, lastCookDate, menuDifct, menuReqTime, userInfo, menuTag)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (menuNm, mealType, menuDifct, menuReqTime,menuTag)
+        VALUES(?, ?, ?, ?, ?)
 
       `,
-      values: [
-        imgSrc,
-        imgWidth,
-        imgeHeight,
-        menuNm,
-        mealType,
-        lastCookDate,
-        menuDifct,
-        menuReqTime,
-        userInfo,
-        menuTag,
-      ],
+      values: [menuNm, mealType, menuDifct, menuReqTime, menuTag],
     });
     // return result;
     // console.log("props", result);
