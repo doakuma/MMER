@@ -36,44 +36,11 @@ function recipeRegist() {
     userInfo: "",
     menuTag: "",
   };
-  let testParams = {
-    imgSrc: "/images/stock/menu08.jpg",
-    imgWidth: 400,
-    imgeHeight: 300,
-    menuNm: "누구냐 넌",
-    mealType: "태국요리",
-    lastCookDate: "2022-03-31",
-    menuDifct: "3",
-    menuReqTime: "60",
-    userInfo: "/images/user/@userIcon.png",
-    menuTag: "주말",
-  };
-  const [inputs, setInputs] = useState(testParams);
+
+  const [inputs, setInputs] = useState(params);
 
   const registData = async (e) => {
     e.preventDefault();
-    const params = {
-      imgSrc: inputs.imgSrc,
-      imgWidth: inputs.imgWidth,
-      imgeHeight: inputs.imgeHeight,
-      menuNm: inputs.menuNm,
-      mealType: inputs.mealType,
-      lastCookDate: inputs.lastCookDate,
-      menuDifct: inputs.menuDifct,
-      menuReqTime: inputs.menuReqTime,
-      userInfo: inputs.userInfo,
-      menuTag: inputs.menuTag,
-    };
-    await axios
-      .post(url, { params })
-      .then((res) => {
-        console.log("registData", res);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-  const modifyData = async (e) => {
     const params = {
       imgSrc: inputs.imgSrc,
       imgWidth: inputs.imgWidth,
@@ -188,7 +155,6 @@ function recipeRegist() {
         </div>
         <div className="btn-area md">
           <button onClick={(e) => registData(e)}>메뉴 등록</button>
-          <button onClick={(e) => modifyData(e)}>메뉴 수정</button>
           <button onClick={onReset}>취소</button>
         </div>
       </section>

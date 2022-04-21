@@ -358,3 +358,23 @@
 .btn-gnb.active:after {
   width: 100%;
 }
+
+/* util */
+.menu-util {
+  display: flex;
+  align-items: center;
+  margin: 0 10vw 0 auto;
+}
+.menu-util li {
+  margin: 0 10px;
+}
+.menu-util li:last-of-type {
+  margin-right: 0;
+}
+.btn-util {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #f0d616;
+  color: #fff;
+  font-weight: bold;
+}
