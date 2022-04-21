@@ -255,7 +255,7 @@ function recipeRegist() {
               <label className="tit-regist" htmlFor="amtSrcs">
                 양념 양
               </label>
-              <textarea className="text" id="amtSrcs"></textarea>
+              <input type="text" className="text" id="amtSrcs" />
             </li>
           </ul>
           <div className="btn-area md">
@@ -269,7 +269,7 @@ function recipeRegist() {
               <label className="tit-regist" htmlFor="cookSeq01">
                 1
               </label>
-              <input type="text" className="text" id="cookSeq01" />
+              <textarea className="text" id="cookSeq01"></textarea>
             </li>
           </ul>
           <div className="btn-area md">
