@@ -81,6 +81,20 @@ function recipeRegist() {
     <Layout home={false} siteTitle="recipe details">
       <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
+        <ol className="list-seq">
+          <li className="current">
+            <span>기본정보</span>
+          </li>
+          <li>
+            <span>재료정보</span>
+          </li>
+          <li>
+            <span>양념정보</span>
+          </li>
+          <li>
+            <span>조리정보</span>
+          </li>
+        </ol>
         <div className="regist regist_info">
           <h2 className="stit-recipe">메뉴 기본 정보</h2>
           <ul className="list-regist">
