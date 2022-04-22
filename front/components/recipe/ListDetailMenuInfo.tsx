@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 const ListDetailMenuInfo = (props: any) => {
   const [menuInfo, setMenuInfo] = useState({});
   useEffect(() => {
-    // setMenuInfo(_.get(props, "menuInfo"));
-    setMenuInfo(_.get(props, "data"));
+    console.log("props", props);
+    setMenuInfo(props);
+    // setMenuInfo(_.get(props, "data"));
   }, [props]);
   const calcDday = (date: number) => {
     let toDay = moment();

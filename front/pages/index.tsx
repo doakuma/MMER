@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   // topInfo = _.slice(menuData, 0, 3);
   topInfo = menuData;
   // btmInfo = _.slice(sortInfo, 3, sortInfo.length);
-  console.info("topInfo", topInfo);
+  // console.info("topInfo", topInfo);
   return (
     <Layout home siteTitle="main">
       <div className="main-top">

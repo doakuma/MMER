@@ -28,10 +28,9 @@ function RecipeDetail() {
       .then((res) => {
         console.log("getDetails", res);
         let resData = _.get(res, "data.result");
-        setMenuData(resData);
-        // setMenuData(_.get(resData, "menuData"));
-        // setMenuIngr(_.get(resData, "menuIngr"));
-        // setRecipeData(_.get(resData, "recipeData"));
+        setMenuData(_.get(resData, "data.menuInfo"));
+        setMenuIngr(_.get(resData, "data.ingrList"));
+        setRecipeData(_.get(resData, "data.seqList"));
       })
       .catch((err) => {
         console.log("error", err);
@@ -59,10 +58,10 @@ function RecipeDetail() {
         <div className="cont-detail">
           <div className="detail-left">
             <ListDetailMenuInfo {...menuData} />
-            <ListDetaiIngrInfo {...menuData} />
+            <ListDetaiIngrInfo props={menuIngr} />
           </div>
           <div className="detail-right">
-            <ListDetailRecipeInfo {...menuData} />
+            <ListDetailRecipeInfo {...recipeData} />
           </div>
         </div>
         <div className="btn-area md">
