@@ -161,6 +161,15 @@
 }
 .detail-body {
 }
+.detail-body .stit-seq {
+  margin: 20px 0 0 10px;
+}
+.box-detail {
+  margin: 20px 0 0;
+  padding: 0 20px;
+  border: 1px solid #e5cd10;
+  border-radius: 5px;
+}
 .detial-line {
   display: flex;
   align-items: center;
@@ -265,6 +274,10 @@
 .stit-box {
   font-weight: bold;
   font-size: 20px;
+}
+.stit-seq {
+  font-size: 16px;
+  font-weight: bold;
 }
 /* button */
 .btn-area {

@@ -13,7 +13,6 @@ const ListDetailRecipeInfo = (props: any) => {
   }, [props]);
   return (
     <div className="detail-body">
-      <h2 className="stit-box">Recipe</h2>
       {drawSeq(seqIngr)}
       {drawSeq(seqSrc)}
       {drawSeq(seqCook)}
@@ -21,30 +20,32 @@ const ListDetailRecipeInfo = (props: any) => {
   );
 };
 
-const drawSeq = (type) => {
+const drawSeq = (type: any) => {
   return (
     <>
       <h3 className="stit-seq">{_.get(type, "[0].seqType")}</h3>
-      {!_.isEmpty(type) &&
-        type.map((row: any, idx: number) => {
-          return (
-            <div className="detial-line" key={idx}>
-              <span className="detail-order">{row.cookSeq}</span>
-              <div className="detial-cont">
-                <span className="cont-text">{row.cookDesc}</span>
-                {!_.isEmpty(row.cookImg) && (
-                  <Image
-                    src={row.cookImg}
-                    width="180"
-                    height="120"
-                    alt={row.cookImgAlt}
-                    className="cont-img"
-                  />
-                )}
+      <div className="box-detail">
+        {!_.isEmpty(type) &&
+          type.map((row: any, idx: number) => {
+            return (
+              <div className="detial-line" key={idx}>
+                <span className="detail-order">{row.cookSeq}</span>
+                <div className="detial-cont">
+                  <span className="cont-text">{row.cookDesc}</span>
+                  {!_.isEmpty(row.cookImg) && (
+                    <Image
+                      src={row.cookImg}
+                      width="180"
+                      height="120"
+                      alt={row.cookImgAlt}
+                      className="cont-img"
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </>
   );
 };
