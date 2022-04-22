@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     const result = await excuteQuery({
       query: `
       UPDATE
-        recipe_list
+        menu_list
       SET 
          imgSrc = ?, 
          imgWidth = ?, 

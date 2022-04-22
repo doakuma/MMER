@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   try {
     const result = await excuteQuery({
       query: `
-      DELETE FROM recipe_list
+      DELETE FROM menu_list
         WHERE id = ?
       `,
       values: [id],

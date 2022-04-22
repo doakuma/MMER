@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     const result = await excuteQuery({
       query: `
       SELECT * 
-        FROM recipe_list
+        FROM menu_list
         WHERE id = ?
       `,
       values: [id],

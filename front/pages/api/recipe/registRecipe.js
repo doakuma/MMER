@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     const result = await excuteQuery({
       query: `
       INSERT
-        recipe_list
+        menu_list
         (menuNm, mealType, menuDifct, menuReqTime,menuTag)
         VALUES(?, ?, ?, ?, ?)
 

@@ -5,7 +5,7 @@ export async function getLists() {
     const result = await excuteQuery({
       query: `
       SELECT * 
-        FROM recipe_list
+        FROM menu_list
         ORDER BY menuNm DESC
         LIMIT 0, 10
       `,
