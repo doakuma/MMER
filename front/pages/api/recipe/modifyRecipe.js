@@ -17,6 +17,8 @@ export default async function handler(req, res) {
     userInfo,
     menuTag,
     id,
+    ingrList,
+    cookList,
   } = req.body.inputs;
   console.log(
     "req==============================================================",
@@ -58,6 +60,42 @@ export default async function handler(req, res) {
         id,
       ],
     });
+
+    await ingrList.map(async (row, idx) => {
+      const rsIngr = await excuteQuery({
+        query: `
+        UPDATE
+            ingredient_list
+            ingrName = ?, 
+            ingrType = ?,
+            ingrAmt = ?
+          WHERE menuId = ?
+        `,
+        values: [id, row.ingrName, row.ingrType, row.ingrAmt],
+      });
+    });
+    // await cookList.map(async (row, idx) => {
+    //   const rsCook = await excuteQuery({
+    //     query: `
+    //     UPDATE
+    //         recipe_list
+    //         seqType = ?,
+    //         cookSeq = ?,
+    //         cookDesc = ?,
+    //         cookImg = ?,
+    //         cookImgAlt = ?
+    //       WHERE menuId = ?
+    //     `,
+    //     values: [
+    //       id,
+    //       row.seqType,
+    //       row.cookSeq,
+    //       row.cookDesc,
+    //       row.cookImg,
+    //       row.cookImgAlt,
+    //     ],
+    //   });
+    // });
     // return result;
     // console.log("props", result);
     _.set(props, "result", result);

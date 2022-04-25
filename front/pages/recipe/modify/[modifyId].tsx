@@ -23,6 +23,8 @@ export interface IModify {
   userInfo: string;
   menuTag: string;
   id: string;
+  lineIngr: Array<any>;
+  cookList: Array<any>;
 }
 function recipeModify() {
   const { query, pathname } = useRouter();
@@ -70,6 +72,8 @@ function recipeModify() {
     userInfo: _.get(menuData, "userInfo"),
     menuTag: _.get(menuData, "menuTag"),
     id: _.get(menuData, "id"),
+    ingrList: menuIngr,
+    cookList: recipeData,
   };
   const [inputs, setInputs] = useState({});
   const modifyData = async (e) => {
