@@ -510,7 +510,7 @@
 }
 .list-regist li {
   display: grid;
-  grid-template-columns: 10% 1fr 10% 1fr 10% 1fr;
+  grid-template-columns: 10% 1fr 10% 1fr 10% 1fr 5%;
   align-items: center;
   padding: 10px 0;
   border-top: 1px solid #e4e8ef;
@@ -520,8 +520,7 @@
   padding: 0 0 0 20px;
 }
 .regist.regist_cookseq li {
-  display: flex;
-  align-items: center;
+  grid-template-columns: 5% 1fr 5%;
 }
 .regist.regist_cookseq li .tit-regist {
   display: flex;
@@ -530,7 +529,6 @@
   padding: 0;
   width: 30px;
   height: 30px;
-  margin: 0 10px 0 0;
   border: 1px solid #e5cd10;
   background: #e5cd10;
   color: #fff;
@@ -541,4 +539,36 @@
 .tit-regist .regist:first-of-type,
 .list-regist li:first-of-type {
   border: 0;
+}
+
+.btn-add {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 10px;
+  border: none;
+  border-radius: 2px;
+  font-size: 0;
+  line-height: 0;
+  background: #e5cd10;
+  cursor: pointer;
+}
+.btn-add:before,
+.btn-add:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #f5f3e3;
+}
+.btn-add:before {
+  width: 20px;
+  height: 2px;
+}
+.btn-add:after {
+  width: 2px;
+  height: 20px;
 }

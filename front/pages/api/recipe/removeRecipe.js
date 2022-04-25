@@ -20,6 +20,20 @@ export default async function handler(req, res) {
       `,
       values: [id],
     });
+    const resIngr = await excuteQuery({
+      query: `
+      DELETE FROM ingredient_list
+        WHERE menuId = ?
+      `,
+      values: [id],
+    });
+    const resCook = await excuteQuery({
+      query: `
+      DELETE FROM recipe_list
+        WHERE menuId = ?
+      `,
+      values: [id],
+    });
     // return result;
     // console.log("props", result);
     _.set(props, "result.data", result);

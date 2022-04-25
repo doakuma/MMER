@@ -12,6 +12,7 @@ import _ from "lodash";
 
 function RecipeDetail() {
   const { query, pathname } = useRouter();
+  const router = useRouter();
   const [menuData, setMenuData] = useState({});
   const [menuIngr, setMenuIngr] = useState([]);
   const [recipeData, setRecipeData] = useState({});
@@ -42,6 +43,9 @@ function RecipeDetail() {
       .post(removeUrl, { params })
       .then((res) => {
         console.log("removeData", res);
+        if (_.get(res, "data.result.data.serverStatus") === 2) {
+          router.push("/recipe/recipeLists");
+        }
       })
       .catch((err) => {
         console.log("err", err);

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import axios from "axios";
 import Layout from "../../components/common/Layout";
-import ListDetailMenuInfo from "../../components/recipe/ListDetailMenuInfo";
+import LineItem from "../../components/recipe/LineItem";
 import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
 import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
 import _, { now } from "lodash";
@@ -22,6 +22,8 @@ export interface IRegist {
   userInfo: string;
   menuTag: string;
   cookFreq: number;
+  lineIngr: Array<any>;
+  cookList: Array<any>;
 }
 function recipeRegist() {
   let url = `/api/recipe/registRecipe`;
@@ -38,8 +40,25 @@ function recipeRegist() {
     menuTag: "",
     cookFreq: 0,
   };
+  let lineParams = {
+    lineType: "",
+    menuId: "",
+    cookDesc: "감자를 깎는다",
+    cookImg: "",
+    cookImgAlt: "",
+    seqType: "재료손질",
+    cookSeq: "1",
+    ingrName: "감자",
+    ingrType: "채소",
+    ingrAmt: "2개",
+    onClick: _.noop(),
+  };
 
   const [inputs, setInputs] = useState(params);
+  const [parIngr, seParIngr] = useState();
+  const [parCook, seParCook] = useState({});
+  const [lineIngr, setLineIngr] = useState([]);
+  const [lineCook, setLineCook] = useState([]);
 
   const registData = async (e) => {
     e.preventDefault();
@@ -55,6 +74,8 @@ function recipeRegist() {
       userInfo: inputs.userInfo,
       menuTag: inputs.menuTag,
       cookFreq: inputs.cookFreq,
+      ingrList: lineIngr,
+      cookList: lineCook,
     };
     await axios
       .post(url, { params })
@@ -76,6 +97,15 @@ function recipeRegist() {
   const onReset = () => {
     setInputs(params);
   };
+
+  const addLine = (type: any) => {
+    console.log("type", type);
+  };
+
+  useEffect(() => {
+    setLineIngr((prev) => [...lineIngr, lineParams]);
+    setLineCook((prev) => [...lineCook, lineParams]);
+  }, []);
 
   return (
     <Layout home={false} siteTitle="recipe details">
@@ -223,58 +253,31 @@ function recipeRegist() {
         <div className="regist regist_ingredient">
           <h2 className="stit-recipe">재료</h2>
           <ul className="list-regist">
-            <li>
-              <label className="tit-regist" htmlFor="selIngr">
-                재료 종류
-              </label>
-              <select name="selIngr" id="selIngr" className="text">
-                <option value="">Type</option>
-              </select>
-              <label className="tit-regist" htmlFor="nmIngr">
-                재료 명
-              </label>
-              <input type="text" className="text" id="nmIngr" />
-              <label className="tit-regist" htmlFor="amtIngr">
-                재료 양
-              </label>
-              <input type="text" className="text" id="amtIngr" />
-            </li>
+            {lineIngr.map((item, idx) => {
+              console.log("lineIngr", item);
+              return (
+                <LineItem
+                  lineType="lineIngr"
+                  onClick={() => addLine("addIngr")}
+                  listData={item}
+                  key={idx}
+                />
+              );
+            })}
           </ul>
-          <div className="btn-area md">
-            <button className="btn secondary">재료 추가</button>
-          </div>
-        </div>
-        <div className="regist regist_source">
-          <h2 className="stit-recipe">양념</h2>
-          <ul className="list-regist">
-            <li>
-              <label className="tit-regist" htmlFor="nmSrcs">
-                양념 명
-              </label>
-              <input type="text" className="text" id="nmSrcs" />
-              <label className="tit-regist" htmlFor="amtSrcs">
-                양념 양
-              </label>
-              <input type="text" className="text" id="amtSrcs" />
-            </li>
-          </ul>
-          <div className="btn-area md">
-            <button className="btn secondary">순서 추가</button>
-          </div>
         </div>
         <div className="regist regist_cookseq">
           <h2 className="stit-recipe">조리</h2>
           <ul className="list-regist">
-            <li>
-              <label className="tit-regist" htmlFor="cookSeq01">
-                1
-              </label>
-              <textarea className="text" id="cookSeq01"></textarea>
-            </li>
+            {lineCook.map((item, idx) => (
+              <LineItem
+                lineType="lineCook"
+                onClick={() => addLine("addCook")}
+                listData={item}
+                key={idx}
+              />
+            ))}
           </ul>
-          <div className="btn-area md">
-            <button className="btn secondary">순서 추가</button>
-          </div>
         </div>
         <div className="btn-area md">
           <button className="btn primary" onClick={(e) => registData(e)}>
