@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import axios from "axios";
 import Layout from "../../../components/common/Layout";
-import ListDetailMenuInfo from "../../../components/recipe/ListDetailMenuInfo";
+import LineItem from "../../../components/recipe/LineItem";
 import ListDetaiIngrInfo from "../../../components/recipe/ListDetaiIngrInfo";
 import ListDetailRecipeInfo from "../../../components/recipe/ListDetailRecipeInfo";
 import _, { now } from "lodash";
+import NavSeq from "../../../components/recipe/NavSeq";
 
 export interface IModify {
   imgSrc: string;
@@ -26,6 +27,8 @@ export interface IModify {
 function recipeModify() {
   const { query, pathname } = useRouter();
   const [menuData, setMenuData] = useState({});
+  const [menuIngr, setMenuIngr] = useState([]);
+  const [recipeData, setRecipeData] = useState({});
   let _geturl = `/api/recipe/getRecipe`;
   let params = {
     id: _.get(query, "modifyId"),
@@ -35,12 +38,12 @@ function recipeModify() {
     await axios
       .get(_geturl, { params })
       .then((res) => {
-        console.log("getDetails", res);
         let resData = _.get(res, "data.result.data");
+        console.log("getDetails", resData);
         setMenuData(resData);
-        // setMenuData(_.get(resData, "menuData"));
-        // setMenuIngr(_.get(resData, "menuIngr"));
-        // setRecipeData(_.get(resData, "recipeData"));
+        setMenuData(_.get(resData, "menuInfo"));
+        setMenuIngr(_.get(resData, "ingrList"));
+        setRecipeData(_.get(resData, "seqList"));
       })
       .catch((err) => {
         console.log("error", err);
@@ -95,110 +98,178 @@ function recipeModify() {
     <Layout home={false} siteTitle="recipe details">
       <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
-        <div>
-          <label htmlFor="imgSrc">이미지 경로</label>
-          <input
-            type="text"
-            id="imgSrc"
-            name="imgSrc"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "imgSrc")}
-          />
+        <div className="regist regist_info">
+          <h2 className="stit-recipe">메뉴 기본 정보</h2>
+
+          <NavSeq />
+
+          <ul className="list-regist">
+            <li>
+              <label className="tit-regist" htmlFor="imgSrc">
+                이미지 경로
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="imgSrc"
+                name="imgSrc"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "imgSrc")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="imgWidth">
+                이미지 너비
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="imgWidth"
+                name="imgWidth"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "imgWidth")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="imgeHeight">
+                이미지 높이
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="imgeHeight"
+                name="imgeHeight"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "imgHeight")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="menuNm">
+                메뉴 이름
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="menuNm"
+                name="menuNm"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "menuNm")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="mealType">
+                메뉴 종류
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="mealType"
+                name="mealType"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "mealType")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="lastCookDate">
+                마지막 조리
+              </label>
+              <input
+                className="text"
+                type="date"
+                id="lastCookDate"
+                name="lastCookDate"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "lastCookDate")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="menuDifct">
+                메뉴 난이도
+              </label>
+              <input
+                className="text"
+                type="number"
+                id="menuDifct"
+                name="menuDifct"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "menuDifct")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="menuReqTime">
+                조리 시간
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="menuReqTime"
+                name="menuReqTime"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "menuReqTime")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="userInfo">
+                작성자
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="userInfo"
+                name="userInfo"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "userInfo")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="menuTag">
+                메뉴 태그
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="menuTag"
+                name="menuTag"
+                onChange={onChange}
+                defaultValue={_.get(menuData, "menuTag")}
+              />
+            </li>
+          </ul>
         </div>
-        <div>
-          <label htmlFor="imgWidth">이미지 너비</label>
-          <input
-            type="text"
-            id="imgWidth"
-            name="imgWidth"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "imgWidth")}
-          />
+        <div className="regist regist_ingredient">
+          <h2 className="stit-recipe">재료</h2>
+          {/* <ul className="list-regist">
+            {lineIngr.map((item, idx) => {
+              console.log("lineIngr", item);
+              return (
+                <LineItem
+                  onClick={() => addLine("addIngr")}
+                  {...item}
+                  key={idx}
+                />
+              );
+            })}
+          </ul> */}
         </div>
-        <div>
-          <label htmlFor="imgeHeight">이미지 높이</label>
-          <input
-            type="text"
-            id="imgeHeight"
-            name="imgeHeight"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "imgHeight")}
-          />
-        </div>
-        <div>
-          <label htmlFor="menuNm">메뉴 이름</label>
-          <input
-            type="text"
-            id="menuNm"
-            name="menuNm"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "menuNm")}
-          />
-        </div>
-        <div>
-          <label htmlFor="mealType">메뉴 종류</label>
-          <input
-            type="text"
-            id="mealType"
-            name="mealType"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "mealType")}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastCookDate">마지막 조리</label>
-          <input
-            type="date"
-            id="lastCookDate"
-            name="lastCookDate"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "lastCookDate")}
-          />
-        </div>
-        <div>
-          <label htmlFor="menuDifct">메뉴 난이도</label>
-          <input
-            type="number"
-            id="menuDifct"
-            name="menuDifct"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "menuDifct")}
-          />
-        </div>
-        <div>
-          <label htmlFor="menuReqTime">조리 시간</label>
-          <input
-            type="text"
-            id="menuReqTime"
-            name="menuReqTime"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "menuReqTime")}
-          />
-        </div>
-        <div>
-          <label htmlFor="userInfo">작성자</label>
-          <input
-            type="text"
-            id="userInfo"
-            name="userInfo"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "userInfo")}
-          />
-        </div>
-        <div>
-          <label htmlFor="menuTag">메뉴 태그</label>
-          <input
-            type="text"
-            id="menuTag"
-            name="menuTag"
-            onChange={onChange}
-            defaultValue={_.get(menuData, "menuTag")}
-          />
+        <div className="regist regist_cookseq">
+          <h2 className="stit-recipe">조리</h2>
+          {/* <ul className="list-regist">
+            {lineCook.map((item, idx) => (
+              <LineItem
+                onClick={() => addLine("addCook")}
+                {...item}
+                key={idx}
+              />
+            ))}
+          </ul> */}
         </div>
         <div className="btn-area md">
-          {/* <button onClick={(e) => registData(e)}>메뉴 등록</button> */}
-          <button onClick={(e) => modifyData(e)}>메뉴 수정</button>
-          <button onClick={onReset}>취소</button>
+          <button className="btn primary" onClick={(e) => modifyData(e)}>
+            메뉴 수정
+          </button>
+          <button className="btn primary" onClick={onReset}>
+            취소
+          </button>
         </div>
       </section>
     </Layout>

@@ -5,7 +5,7 @@ import moment from "moment";
 
 export interface ILineItem {
   lineType?: string;
-  menuId?: number;
+  menuId?: string;
   cookDesc?: string;
   cookImg?: string;
   cookImgAlt?: string;

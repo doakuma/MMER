@@ -44,12 +44,11 @@ function recipeRegist() {
   };
   let lineParams = {
     lineType: "",
-    menuId: "",
     cookDesc: "감자를 깎는다",
     cookImg: "",
     cookImgAlt: "",
     seqType: "재료손질",
-    cookSeq: "1",
+    cookSeq: 1,
     ingrName: "감자",
     ingrType: "채소",
     ingrAmt: "2개",
@@ -61,7 +60,7 @@ function recipeRegist() {
   const [lineIngr, setLineIngr] = useState([lineParams]);
   const [lineCook, setLineCook] = useState([lineParams]);
 
-  const registData = async (e) => {
+  const registData = async (e: any) => {
     e.preventDefault();
     const params = {
       imgSrc: inputs.imgSrc,
@@ -91,7 +90,7 @@ function recipeRegist() {
       });
   };
 
-  const onChange = (e) => {
+  const onChange = (e: any) => {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
@@ -250,9 +249,8 @@ function recipeRegist() {
               console.log("lineIngr", item);
               return (
                 <LineItem
-                  lineType="lineIngr"
                   onClick={() => addLine("addIngr")}
-                  listData={item}
+                  {...item}
                   key={idx}
                 />
               );
@@ -264,9 +262,8 @@ function recipeRegist() {
           <ul className="list-regist">
             {lineCook.map((item, idx) => (
               <LineItem
-                lineType="lineCook"
                 onClick={() => addLine("addCook")}
-                listData={item}
+                {...item}
                 key={idx}
               />
             ))}
