@@ -9,6 +9,7 @@ import LineItem from "../../components/recipe/LineItem";
 import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
 import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
 import _, { now } from "lodash";
+import NavSeq from "../../components/recipe/NavSeq";
 
 export interface IRegist {
   imgSrc: string;
@@ -26,6 +27,7 @@ export interface IRegist {
   cookList: Array<any>;
 }
 function recipeRegist() {
+  const router = useRouter();
   let url = `/api/recipe/registRecipe`;
   let params = {
     imgSrc: "",
@@ -51,14 +53,13 @@ function recipeRegist() {
     ingrName: "감자",
     ingrType: "채소",
     ingrAmt: "2개",
-    onClick: _.noop(),
   };
 
   const [inputs, setInputs] = useState(params);
   const [parIngr, seParIngr] = useState();
   const [parCook, seParCook] = useState({});
-  const [lineIngr, setLineIngr] = useState([]);
-  const [lineCook, setLineCook] = useState([]);
+  const [lineIngr, setLineIngr] = useState([lineParams]);
+  const [lineCook, setLineCook] = useState([lineParams]);
 
   const registData = async (e) => {
     e.preventDefault();
@@ -81,6 +82,9 @@ function recipeRegist() {
       .post(url, { params })
       .then((res) => {
         console.log("registData", res);
+        if (_.get(res, "data.result.data.serverStatus") === 2) {
+          router.push("/recipe/recipeLists");
+        }
       })
       .catch((err) => {
         console.log("err", err);
@@ -102,31 +106,20 @@ function recipeRegist() {
     console.log("type", type);
   };
 
-  useEffect(() => {
-    setLineIngr((prev) => [...lineIngr, lineParams]);
-    setLineCook((prev) => [...lineCook, lineParams]);
-  }, []);
+  // useEffect(() => {
+  //   setLineIngr((prev) => [...prev, lineParams]);
+  //   setLineCook((prev) => [...prev, lineParams]);
+  // }, []);
 
   return (
     <Layout home={false} siteTitle="recipe details">
       <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
-        <ol className="list-seq">
-          <li className="current">
-            <span>기본정보</span>
-          </li>
-          <li>
-            <span>재료정보</span>
-          </li>
-          <li>
-            <span>양념정보</span>
-          </li>
-          <li>
-            <span>조리정보</span>
-          </li>
-        </ol>
         <div className="regist regist_info">
           <h2 className="stit-recipe">메뉴 기본 정보</h2>
+
+          <NavSeq />
+
           <ul className="list-regist">
             <li>
               <label className="tit-regist" htmlFor="imgSrc">

@@ -519,6 +519,14 @@
   font-weight: bold;
   padding: 0 0 0 20px;
 }
+.regist.regist_info .list-regist {
+  display: flex;
+  flex-wrap: wrap;
+}
+.regist.regist_info .list-regist li {
+  width: 50%;
+  grid-template-columns: 20% 1fr;
+}
 .regist.regist_cookseq li {
   grid-template-columns: 5% 1fr 5%;
 }
@@ -536,8 +544,7 @@
 .regist.regist_cookseq li .text {
   width: 100%;
 }
-.tit-regist .regist:first-of-type,
-.list-regist li:first-of-type {
+.tit-regist .regist:first-of-type {
   border: 0;
 }
 
