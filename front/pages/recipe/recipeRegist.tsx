@@ -41,24 +41,41 @@ function recipeRegist() {
     userInfo: "",
     menuTag: "",
     cookFreq: 0,
+    ingrList: [],
+    cookList: [],
   };
-  let lineParams = {
-    lineType: "",
+  let ingrParams = {
+    lineType: "lineIngr",
+    ingrName: "감자",
+    ingrType: "채소",
+    ingrAmt: "2개",
+  };
+  let cookParams = {
+    lineType: "lineCook",
     cookDesc: "감자를 깎는다",
     cookImg: "",
     cookImgAlt: "",
     seqType: "재료손질",
     cookSeq: 1,
-    ingrName: "감자",
-    ingrType: "채소",
-    ingrAmt: "2개",
   };
+  // let ingrParams = {
+  //   lineType: "",
+  //   ingrName: "",
+  //   ingrType: "",
+  //   ingrAmt: "",
+  // };
+  // let cookParams = {
+  //   lineType: "",
+  //   cookDesc: "",
+  //   cookImg: "",
+  //   cookImgAlt: "",
+  //   seqType: "",
+  //   cookSeq: ,
+  // };
 
-  const [inputs, setInputs] = useState(params);
-  const [parIngr, seParIngr] = useState();
-  const [parCook, seParCook] = useState({});
-  const [lineIngr, setLineIngr] = useState([lineParams]);
-  const [lineCook, setLineCook] = useState([lineParams]);
+  const [inputs, setInputs] = useState(params); // 기본정보 입력
+  const [lineIngr, setLineIngr] = useState([ingrParams]); // 재료 라인 배열
+  const [lineCook, setLineCook] = useState([cookParams]); // 조리 라인 배열
 
   const registData = async (e: any) => {
     e.preventDefault();
@@ -97,12 +114,37 @@ function recipeRegist() {
       [name]: value,
     });
   };
+  const onChangeIngr = (e: any) => {
+    const { value, name, id } = e.target;
+    const newIngr = lineIngr.map((item, idx) => {
+      if (_.includes(id, idx)) {
+        return { ...item, [name]: value };
+      }
+      return item;
+    });
+    setLineIngr(newIngr);
+  };
+  const onChangeCook = (e: any) => {
+    const { value, name, id } = e.target;
+    const newCook = lineCook.map((item, idx) => {
+      if (_.includes(id, idx)) {
+        return { ...item, [name]: value };
+      }
+      return item;
+    });
+    setLineCook(newCook);
+  };
   const onReset = () => {
     setInputs(params);
   };
 
   const addLine = (type: any) => {
     console.log("type", type);
+    if (type === "addIngr") {
+      setLineIngr((prev) => [...prev, ingrParams]);
+    } else {
+      setLineCook((prev) => [...prev, cookParams]);
+    }
   };
 
   // useEffect(() => {
@@ -246,12 +288,13 @@ function recipeRegist() {
           <h2 className="stit-recipe">재료</h2>
           <ul className="list-regist">
             {lineIngr.map((item, idx) => {
-              console.log("lineIngr", item);
               return (
                 <LineItem
                   onClick={() => addLine("addIngr")}
+                  onChange={(e) => onChangeIngr(e)}
                   {...item}
                   key={idx}
+                  lineKey={idx}
                 />
               );
             })}
@@ -263,8 +306,10 @@ function recipeRegist() {
             {lineCook.map((item, idx) => (
               <LineItem
                 onClick={() => addLine("addCook")}
+                onChange={(e) => onChangeCook(e)}
                 {...item}
                 key={idx}
+                lineKey={idx}
               />
             ))}
           </ul>

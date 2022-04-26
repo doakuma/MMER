@@ -14,7 +14,9 @@ export interface ILineItem {
   ingrName?: string;
   ingrType?: string;
   ingrAmt?: string;
+  lineKey?: any;
   onClick?: (event: Event) => void;
+  onChange?: (event: Event) => void;
 }
 
 const LineItem = (listData: ILineItem) => {
@@ -30,6 +32,8 @@ const LineItem = (listData: ILineItem) => {
     ingrType,
     ingrAmt,
     onClick,
+    onChange,
+    lineKey,
   } = listData;
   if (lineType === "lineIngr") {
     return ingrLine({ ...listData });
@@ -39,23 +43,42 @@ const LineItem = (listData: ILineItem) => {
 };
 
 const ingrLine = (props: any) => {
-  const { menuId, ingrName, ingrType, ingrAmt, onClick } = props;
+  console.log("ingrLine", props);
+  const { menuId, ingrName, ingrType, ingrAmt, onClick, onChange, lineKey } =
+    props;
   return (
     <li>
-      <label className="tit-regist" htmlFor="selIngr">
+      <label className="tit-regist" htmlFor={`ingr-${lineKey}-type`}>
         재료 종류
       </label>
-      <select name="selIngr" id="selIngr" className="text">
+      <select
+        name="ingrType"
+        className="text"
+        onChange={onChange}
+        id={`ingr-${lineKey}-type`}
+      >
         <option value="">Type</option>
       </select>
-      <label className="tit-regist" htmlFor="nmIngr">
+      <label className="tit-regist" htmlFor={`ingr-${lineKey}-name`}>
         재료 명
       </label>
-      <input type="text" className="text" id="nmIngr" />
-      <label className="tit-regist" htmlFor="amtIngr">
+      <input
+        type="text"
+        className="text"
+        name="ingrName"
+        onChange={onChange}
+        id={`ingr-${lineKey}-name`}
+      />
+      <label className="tit-regist" htmlFor={`ingr-${lineKey}-amt`}>
         재료 양
       </label>
-      <input type="text" className="text" id="amtIngr" />
+      <input
+        type="text"
+        className="text"
+        name="ingrAmt"
+        onChange={onChange}
+        id={`ingr-${lineKey}-amt`}
+      />
       <button className="btn-add" onClick={onClick}>
         재료 추가
       </button>
@@ -63,14 +86,28 @@ const ingrLine = (props: any) => {
   );
 };
 const cookLine = (props: any) => {
-  const { menuId, cookDesc, cookImg, cookImgAlt, seqType, cookSeq, onClick } =
-    props;
+  const {
+    menuId,
+    cookDesc,
+    cookImg,
+    cookImgAlt,
+    seqType,
+    cookSeq,
+    onClick,
+    onChange,
+    lineKey,
+  } = props;
   return (
     <li>
-      <label className="tit-regist" htmlFor="cookSeq01">
-        {cookSeq}
+      <label className="tit-regist" htmlFor="cookDesc">
+        {lineKey + 1}
       </label>
-      <textarea className="text" id="cookSeq01"></textarea>
+      <textarea
+        className="text"
+        name="cookDesc"
+        onChange={onChange}
+        id={`cook-${lineKey}`}
+      ></textarea>
       <button className="btn-add" onClick={onClick}>
         순서 추가
       </button>
