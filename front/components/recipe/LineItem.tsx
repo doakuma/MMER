@@ -21,6 +21,7 @@ export interface ILineItem {
 
 const LineItem = (listData: ILineItem) => {
   const { lineType } = listData;
+  console.log("lineType", lineType);
   if (lineType === "lineIngr") {
     return ingrLine({ ...listData });
   } else {
@@ -29,7 +30,7 @@ const LineItem = (listData: ILineItem) => {
 };
 
 const ingrLine = (props: any) => {
-  const { onClick, onChange, lineKey } = props;
+  const { ingrName, ingrAmt, onClick, onChange, lineKey } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-type`}>
@@ -41,7 +42,8 @@ const ingrLine = (props: any) => {
         onChange={onChange}
         id={`ingr-${lineKey}-type`}
       >
-        <option value="">Type</option>
+        <option value="">주재료</option>
+        <option value="">양념</option>
       </select>
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-name`}>
         재료 명
@@ -52,6 +54,7 @@ const ingrLine = (props: any) => {
         name="ingrName"
         onChange={onChange}
         id={`ingr-${lineKey}-name`}
+        defaultValue={ingrName}
       />
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-amt`}>
         재료 양
@@ -62,6 +65,7 @@ const ingrLine = (props: any) => {
         name="ingrAmt"
         onChange={onChange}
         id={`ingr-${lineKey}-amt`}
+        defaultValue={ingrAmt}
       />
       <button className="btn-add" onClick={onClick}>
         재료 추가
@@ -70,7 +74,7 @@ const ingrLine = (props: any) => {
   );
 };
 const cookLine = (props: any) => {
-  const { onClick, onChange, lineKey } = props;
+  const { cookDesc, onClick, onChange, lineKey } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor="cookDesc">
@@ -81,6 +85,7 @@ const cookLine = (props: any) => {
         name="cookDesc"
         onChange={onChange}
         id={`cook-${lineKey}`}
+        defaultValue={cookDesc}
       ></textarea>
       <button className="btn-add" onClick={onClick}>
         순서 추가

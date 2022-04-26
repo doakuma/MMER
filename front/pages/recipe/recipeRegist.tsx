@@ -44,34 +44,34 @@ function recipeRegist() {
     ingrList: [],
     cookList: [],
   };
+  // let ingrParams = {
+  //   lineType: "lineIngr",
+  //   ingrName: "감자",
+  //   ingrType: "채소",
+  //   ingrAmt: "2개",
+  // };
+  // let cookParams = {
+  //   lineType: "lineCook",
+  //   cookDesc: "감자를 깎는다",
+  //   cookImg: "",
+  //   cookImgAlt: "",
+  //   seqType: "재료손질",
+  //   cookSeq: 1,
+  // };
   let ingrParams = {
     lineType: "lineIngr",
-    ingrName: "감자",
-    ingrType: "채소",
-    ingrAmt: "2개",
+    ingrName: "",
+    ingrType: "",
+    ingrAmt: "",
   };
   let cookParams = {
     lineType: "lineCook",
-    cookDesc: "감자를 깎는다",
+    cookDesc: "",
     cookImg: "",
     cookImgAlt: "",
-    seqType: "재료손질",
-    cookSeq: 1,
+    seqType: "",
+    cookSeq: 0,
   };
-  // let ingrParams = {
-  //   lineType: "",
-  //   ingrName: "",
-  //   ingrType: "",
-  //   ingrAmt: "",
-  // };
-  // let cookParams = {
-  //   lineType: "",
-  //   cookDesc: "",
-  //   cookImg: "",
-  //   cookImgAlt: "",
-  //   seqType: "",
-  //   cookSeq: ,
-  // };
 
   const [inputs, setInputs] = useState(params); // 기본정보 입력
   const [lineIngr, setLineIngr] = useState([ingrParams]); // 재료 라인 배열

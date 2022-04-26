@@ -14,7 +14,7 @@ import NavSeq from "../../../components/recipe/NavSeq";
 export interface IModify {
   imgSrc: string;
   imgWidth: number;
-  imgeHeight: number;
+  imgHeight: number;
   menuNm: string;
   mealType: string;
   lastCookDate: Date;
@@ -54,16 +54,25 @@ function recipeModify() {
   useEffect(() => {
     if (params.id) getData();
   }, [params.id]);
+
   useEffect(() => {
     setInputs(initparams);
   }, [menuData]);
+
+  useEffect(() => {
+    if (_.isEmpty(menuIngr)) return;
+    const newIngr = menuIngr.map((row, idx) => {
+      _.set(row, "lineType", "lineIngr");
+      console.log("newIngr", row);
+    });
+  }, [menuIngr]);
 
   let url = `/api/recipe/registRecipe`;
   let modurl = `/api/recipe/modifyRecipe`;
   let initparams = {
     imgSrc: _.get(menuData, "imgSrc"),
     imgWidth: _.get(menuData, "imgWidth"),
-    imgeHeight: _.get(menuData, "imgHeight"),
+    imgHeight: _.get(menuData, "imgHeight"),
     menuNm: _.get(menuData, "menuNm"),
     mealType: _.get(menuData, "mealType"),
     lastCookDate: _.get(menuData, "lastCookDate"),
@@ -93,6 +102,26 @@ function recipeModify() {
       ...inputs,
       [name]: value,
     });
+  };
+  const onChangeIngr = (e: any) => {
+    const { value, name, id } = e.target;
+    const newIngr = menuIngr.map((item, idx) => {
+      if (_.includes(id, idx)) {
+        return { ...item, [name]: value };
+      }
+      return item;
+    });
+    setMenuIngr(newIngr);
+  };
+  const onChangeCook = (e: any) => {
+    const { value, name, id } = e.target;
+    const newCook = lineCook.map((item, idx) => {
+      if (_.includes(id, idx)) {
+        return { ...item, [name]: value };
+      }
+      return item;
+    });
+    setLineCook(newCook);
   };
   const onReset = () => {
     setInputs(params);
@@ -135,14 +164,14 @@ function recipeModify() {
               />
             </li>
             <li>
-              <label className="tit-regist" htmlFor="imgeHeight">
+              <label className="tit-regist" htmlFor="imgHeight">
                 이미지 높이
               </label>
               <input
                 className="text"
                 type="text"
-                id="imgeHeight"
-                name="imgeHeight"
+                id="imgHeight"
+                name="imgHeight"
                 onChange={onChange}
                 defaultValue={_.get(menuData, "imgHeight")}
               />
@@ -242,30 +271,34 @@ function recipeModify() {
         </div>
         <div className="regist regist_ingredient">
           <h2 className="stit-recipe">재료</h2>
-          {/* <ul className="list-regist">
-            {lineIngr.map((item, idx) => {
+          <ul className="list-regist">
+            {menuIngr.map((item, idx) => {
               console.log("lineIngr", item);
               return (
                 <LineItem
                   onClick={() => addLine("addIngr")}
+                  onChange={(e) => onChangeIngr(e)}
                   {...item}
                   key={idx}
+                  lineKey={idx}
                 />
               );
             })}
-          </ul> */}
+          </ul>
         </div>
         <div className="regist regist_cookseq">
           <h2 className="stit-recipe">조리</h2>
-          {/* <ul className="list-regist">
-            {lineCook.map((item, idx) => (
-              <LineItem
-                onClick={() => addLine("addCook")}
-                {...item}
-                key={idx}
-              />
-            ))}
-          </ul> */}
+          <ul className="list-regist">
+            {/* <>
+              {_.get(recipeData, "seqIngr").map((item, idx) => (
+                <LineItem
+                  onClick={() => addLine("addCook")}
+                  {...item}
+                  key={idx}
+                />
+              ))}
+            </> */}
+          </ul>
         </div>
         <div className="btn-area md">
           <button className="btn primary" onClick={(e) => modifyData(e)}>
