@@ -44,23 +44,14 @@ export default async function handler(req, res) {
       `,
       values: [id],
     });
-    // return result;
-    arrIngr = _.filter(recipeResult, (o) => {
-      return o.seqType === "재료손질";
-    });
-    arrSrc = _.filter(recipeResult, (o) => {
-      return o.seqType === "양념준비";
-    });
-    cookSeeq = _.filter(recipeResult, (o) => {
-      return o.seqType === "조리순서";
-    });
     // arrSrc
     // cookSeeq
     console.log("props", ingrResult);
     _.set(props, "result.data.menuInfo", result[0]);
-    _.set(props, "result.data.seqList.seqIngr", arrIngr);
-    _.set(props, "result.data.seqList.seqSrc", arrSrc);
-    _.set(props, "result.data.seqList.seqCook", cookSeeq);
+    _.set(props, "result.data.seqList", recipeResult);
+    // _.set(props, "result.data.seqList.seqIngr", arrIngr);
+    // _.set(props, "result.data.seqList.seqSrc", arrSrc);
+    // _.set(props, "result.data.seqList.seqCook", cookSeeq);
     _.set(props, "result.data.ingrList", ingrResult);
   } catch (error) {
     console.log(error);

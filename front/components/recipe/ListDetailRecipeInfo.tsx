@@ -7,9 +7,19 @@ const ListDetailRecipeInfo = (props: any) => {
   const [seqSrc, setSeqSrc] = useState([]);
   const [seqCook, setSeqCook] = useState([]);
   useEffect(() => {
-    setSeqIngr(_.get(props, "seqIngr"));
-    setSeqSrc(_.get(props, "seqSrc"));
-    setSeqCook(_.get(props, "seqCook"));
+    // return result;
+    let arrIngr: any = _.filter(props, (o) => {
+      return _.get(o, "seqType") === "재료손질";
+    });
+    let arrSrc: any = _.filter(props, (o) => {
+      return _.get(o, "seqType") === "양념준비";
+    });
+    let cookSeeq: any = _.filter(props, (o) => {
+      return _.get(o, "seqType") === "조리순서";
+    });
+    setSeqIngr(arrIngr);
+    setSeqSrc(arrSrc);
+    setSeqCook(cookSeeq);
   }, [props]);
   return (
     <div className="detail-body">

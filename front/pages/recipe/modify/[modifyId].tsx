@@ -30,7 +30,7 @@ function recipeModify() {
   const { query, pathname } = useRouter();
   const [menuData, setMenuData] = useState({});
   const [menuIngr, setMenuIngr] = useState([]);
-  const [recipeData, setRecipeData] = useState({});
+  const [recipeData, setRecipeData] = useState([]);
   let _geturl = `/api/recipe/getRecipe`;
   let params = {
     id: _.get(query, "modifyId"),
@@ -41,8 +41,6 @@ function recipeModify() {
       .get(_geturl, { params })
       .then((res) => {
         let resData = _.get(res, "data.result.data");
-        console.log("getDetails", resData);
-        setMenuData(resData);
         setMenuData(_.get(resData, "menuInfo"));
         setMenuIngr(_.get(resData, "ingrList"));
         setRecipeData(_.get(resData, "seqList"));
@@ -58,14 +56,29 @@ function recipeModify() {
   useEffect(() => {
     setInputs(initparams);
   }, [menuData]);
+  useEffect(() => {
+    setInputs((prev) => {
+      return {
+        ...prev,
+        ingrList: menuIngr,
+        cookList: recipeData,
+      };
+    });
+  }, [menuIngr, recipeData]);
 
   useEffect(() => {
     if (_.isEmpty(menuIngr)) return;
-    const newIngr = menuIngr.map((row, idx) => {
+    menuIngr.map((row, idx) => {
       _.set(row, "lineType", "lineIngr");
-      console.log("newIngr", row);
     });
   }, [menuIngr]);
+  useEffect(() => {
+    if (_.isEmpty(recipeData)) return;
+    recipeData.map((row, idx) => {
+      _.set(row, "lineType", "lineCook");
+    });
+    console.log("recipeData");
+  }, [recipeData]);
 
   let url = `/api/recipe/registRecipe`;
   let modurl = `/api/recipe/modifyRecipe`;
@@ -84,8 +97,24 @@ function recipeModify() {
     ingrList: menuIngr,
     cookList: recipeData,
   };
+  let ingrParams = {
+    lineType: "lineIngr",
+    ingrName: "",
+    ingrType: "",
+    ingrAmt: "",
+  };
+  let cookParams = {
+    lineType: "lineCook",
+    cookDesc: "",
+    cookImg: "",
+    cookImgAlt: "",
+    seqType: "",
+    cookSeq: 0,
+  };
   const [inputs, setInputs] = useState({});
-  const modifyData = async (e) => {
+  const [lineIngr, setLineIngr] = useState([ingrParams]); // 재료 라인 배열
+  const [lineCook, setLineCook] = useState([cookParams]); // 조리 라인 배열
+  const modifyData = async (e: any) => {
     await axios
       .post(modurl, { inputs })
       .then((res) => {
@@ -105,13 +134,13 @@ function recipeModify() {
   };
   const onChangeIngr = (e: any) => {
     const { value, name, id } = e.target;
-    const newIngr = menuIngr.map((item, idx) => {
+    const newIngr = lineIngr.map((item, idx) => {
       if (_.includes(id, idx)) {
         return { ...item, [name]: value };
       }
       return item;
     });
-    setMenuIngr(newIngr);
+    setLineIngr(newIngr);
   };
   const onChangeCook = (e: any) => {
     const { value, name, id } = e.target;
@@ -123,9 +152,28 @@ function recipeModify() {
     });
     setLineCook(newCook);
   };
+
+  const addLine = (type: any) => {
+    console.log("type", type);
+    if (type === "addIngr") {
+      setLineIngr((prev) => [...prev, ingrParams]);
+    } else {
+      setLineCook((prev) => [...prev, cookParams]);
+    }
+  };
   const onReset = () => {
     setInputs(params);
   };
+
+  useEffect(() => {
+    setInputs((prev) => {
+      return {
+        ...prev,
+        ingrList: lineIngr,
+        cookList: lineCook,
+      };
+    });
+  }, [lineIngr, lineCook]);
 
   return (
     <Layout home={false} siteTitle="recipe details">
@@ -289,15 +337,15 @@ function recipeModify() {
         <div className="regist regist_cookseq">
           <h2 className="stit-recipe">조리</h2>
           <ul className="list-regist">
-            {/* <>
-              {_.get(recipeData, "seqIngr").map((item, idx) => (
-                <LineItem
-                  onClick={() => addLine("addCook")}
-                  {...item}
-                  key={idx}
-                />
-              ))}
-            </> */}
+            {recipeData.map((item, idx) => (
+              <LineItem
+                onClick={() => addLine("addCook")}
+                onChange={(e) => onChangeCook(e)}
+                {...item}
+                key={idx}
+                lineKey={idx}
+              />
+            ))}
           </ul>
         </div>
         <div className="btn-area md">
