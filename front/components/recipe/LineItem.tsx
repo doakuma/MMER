@@ -20,21 +20,7 @@ export interface ILineItem {
 }
 
 const LineItem = (listData: ILineItem) => {
-  const {
-    menuId,
-    lineType,
-    cookDesc,
-    cookImg,
-    cookImgAlt,
-    seqType,
-    cookSeq,
-    ingrName,
-    ingrType,
-    ingrAmt,
-    onClick,
-    onChange,
-    lineKey,
-  } = listData;
+  const { lineType } = listData;
   if (lineType === "lineIngr") {
     return ingrLine({ ...listData });
   } else {
@@ -43,9 +29,7 @@ const LineItem = (listData: ILineItem) => {
 };
 
 const ingrLine = (props: any) => {
-  console.log("ingrLine", props);
-  const { menuId, ingrName, ingrType, ingrAmt, onClick, onChange, lineKey } =
-    props;
+  const { onClick, onChange, lineKey } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-type`}>
@@ -86,17 +70,7 @@ const ingrLine = (props: any) => {
   );
 };
 const cookLine = (props: any) => {
-  const {
-    menuId,
-    cookDesc,
-    cookImg,
-    cookImgAlt,
-    seqType,
-    cookSeq,
-    onClick,
-    onChange,
-    lineKey,
-  } = props;
+  const { onClick, onChange, lineKey } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor="cookDesc">

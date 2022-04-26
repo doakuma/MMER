@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const {
     imgSrc,
     imgWidth,
-    imgeHeight,
+    imgHeight,
     menuNm,
     mealType,
     lastCookDate,
@@ -34,11 +34,22 @@ export default async function handler(req, res) {
       query: `
       INSERT
         menu_list
-        (menuNm, mealType, menuDifct, menuReqTime,menuTag)
-        VALUES(?, ?, ?, ?, ?)
+        (imgSrc, imgWidth, imgHeight, menuNm, mealType, lastCookDate, menuDifct, menuReqTime, userInfo, menuTag)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
       `,
-      values: [menuNm, mealType, menuDifct, menuReqTime, menuTag],
+      values: [
+        imgSrc,
+        imgWidth,
+        imgHeight,
+        menuNm,
+        mealType,
+        lastCookDate,
+        menuDifct,
+        menuReqTime,
+        userInfo,
+        menuTag,
+      ],
     });
 
     // regist ingredient_list, recipe_list
@@ -57,7 +68,7 @@ export default async function handler(req, res) {
           values: [_insertId, row.ingrName, row.ingrType, row.ingrAmt],
         });
       });
-      // console.log("rsIngr", _.get(result, "insertId"), rsIngr);
+      console.log("rsIngr", _.get(result, "insertId"), rsIngr);
       await cookList.map(async (row, idx) => {
         console.log("cookList", row);
         const rsCook = await excuteQuery({

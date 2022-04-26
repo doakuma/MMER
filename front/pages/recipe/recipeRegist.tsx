@@ -14,7 +14,7 @@ import NavSeq from "../../components/recipe/NavSeq";
 export interface IRegist {
   imgSrc: string;
   imgWidth: number;
-  imgeHeight: number;
+  imgHeight: number;
   menuNm: string;
   mealType: string;
   lastCookDate: Date;
@@ -23,8 +23,8 @@ export interface IRegist {
   userInfo: string;
   menuTag: string;
   cookFreq: number;
-  lineIngr: Array<any>;
-  cookList: Array<any>;
+  lineIngr: any;
+  cookList: any;
 }
 function recipeRegist() {
   const router = useRouter();
@@ -32,7 +32,7 @@ function recipeRegist() {
   let params = {
     imgSrc: "",
     imgWidth: "",
-    imgeHeight: "",
+    imgHeight: "",
     menuNm: "",
     mealType: "",
     lastCookDate: now(),
@@ -82,7 +82,7 @@ function recipeRegist() {
     const params = {
       imgSrc: inputs.imgSrc,
       imgWidth: inputs.imgWidth,
-      imgeHeight: inputs.imgeHeight,
+      imgHeight: inputs.imgHeight,
       menuNm: inputs.menuNm,
       mealType: inputs.mealType,
       lastCookDate: inputs.lastCookDate ? inputs.lastCookDate : now(),
@@ -147,10 +147,15 @@ function recipeRegist() {
     }
   };
 
-  // useEffect(() => {
-  //   setLineIngr((prev) => [...prev, lineParams]);
-  //   setLineCook((prev) => [...prev, lineParams]);
-  // }, []);
+  useEffect(() => {
+    setInputs((prev) => {
+      return {
+        ...prev,
+        ingrList: lineIngr,
+        cookList: lineCook,
+      };
+    });
+  }, [lineIngr, lineCook]);
 
   return (
     <Layout home={false} siteTitle="recipe details">
@@ -187,14 +192,14 @@ function recipeRegist() {
               />
             </li>
             <li>
-              <label className="tit-regist" htmlFor="imgeHeight">
+              <label className="tit-regist" htmlFor="imgHeight">
                 이미지 높이
               </label>
               <input
                 className="text"
                 type="text"
-                id="imgeHeight"
-                name="imgeHeight"
+                id="imgHeight"
+                name="imgHeight"
                 onChange={onChange}
               />
             </li>
