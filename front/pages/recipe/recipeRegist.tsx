@@ -26,7 +26,7 @@ export interface IRegist {
   lineIngr: any;
   cookList: any;
 }
-function recipeRegist() {
+function RecipeModify() {
   const router = useRouter();
   let url = `/api/recipe/registRecipe`;
   let params = {
@@ -331,4 +331,4 @@ function recipeRegist() {
     </Layout>
   );
 }
-export default recipeRegist;
+export default RecipeModify;
