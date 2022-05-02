@@ -26,7 +26,7 @@ export interface IModify {
   lineIngr: Array<any>;
   cookList: Array<any>;
 }
-function recipeModify() {
+function RecipeModify() {
   const { query, pathname } = useRouter();
   const [inputs, setInputs] = useState({});
   const [menuInfo, setMenuInfo] = useState({});
@@ -346,4 +346,4 @@ function recipeModify() {
     </Layout>
   );
 }
-export default recipeModify;
+export default RecipeModify;
