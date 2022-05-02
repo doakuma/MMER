@@ -5,26 +5,24 @@ import { useEffect, useState } from "react";
 const ListDetaiIngrInfo = (props: any) => {
   const [ingrData, setIngrData] = useState([]);
   useEffect(() => {
-    setIngrData(props);
+    setIngrData(_.get(props, "props"));
   }, [props]);
+  // console.log("ingrData", ingrData);
   return (
     <div className="wrap-ingr">
-      {!_.isEmpty(_.get(ingrData, "ingrInfo")) &&
-        _.get(ingrData, "ingrInfo").map((row: any, idx: number) => {
-          return (
-            <div className="box-ingr" key={idx}>
-              <h3 className="stit-box">{row.ingrTitle}</h3>
-              {_.get(row, "ingrLists").map((row2: any, idx2: number) => {
-                return (
-                  <dl className="list-ingr" key={idx2}>
-                    <dt className="ingr-nm">{row2.ingrNm}</dt>
-                    <dd className="ingr-amt">{row2.ingrAmt}</dd>
-                  </dl>
-                );
-              })}
-            </div>
-          );
-        })}
+      {!_.isEmpty(ingrData) && (
+        <div className="box-ingr">
+          <h3 className="stit-box">재료</h3>
+          {ingrData.map((row2: any, idx2: number) => {
+            return (
+              <dl className="list-ingr" key={idx2}>
+                <dt className="ingr-nm">{row2.ingrName}</dt>
+                <dd className="ingr-amt">{row2.ingrAmt}</dd>
+              </dl>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

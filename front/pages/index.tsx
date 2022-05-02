@@ -6,99 +6,17 @@ import Layout from "../components/common/Layout";
 import _ from "lodash";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ListItem from "../components/recipe/ListItem";
 
-const dummy = [
-  {
-    imgSrc: "/images/stock/menu01.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "비빔국수",
-    menuDate: 4,
-    menuId: "1",
-    menuTag: ["백주부", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu02.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "떡복이",
-    menuDate: 7,
-    menuId: "2",
-    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu03.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "보쌈",
-    menuDate: 3,
-    menuId: "3",
-    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu01.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "비빔국수",
-    menuDate: 6,
-    menuId: "1",
-    menuTag: ["백주부", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu02.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "떡복이",
-    menuDate: 2,
-    menuId: "2",
-    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu03.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "보쌈",
-    menuDate: 1,
-    menuId: "3",
-    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu01.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "비빔국수",
-    menuDate: 4,
-    menuId: "1",
-    menuTag: ["백주부", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu02.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "떡복이",
-    menuDate: 7,
-    menuId: "2",
-    menuTag: ["수미네 반찬", "주말", "파티 요리", "별미"],
-  },
-  {
-    imgSrc: "/images/stock/menu03.webp",
-    imgWidth: 300,
-    imgHeight: 200,
-    menuNm: "보쌈",
-    menuDate: 3,
-    menuId: "3",
-    menuTag: ["에드워드권", "주말", "파티 요리", "별미"],
-  },
-];
 const Home: NextPage = () => {
-  let url = "/api/mock/recipeList";
+  let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
     axios
       .get(url)
       .then((res) => {
-        console.log("res", res);
-        // setMenuData(res.result.data)
+        // console.log("res", res.data.result);
+        setMenuData(_.get(res, "data.result.list"));
       })
       .catch((err) => {});
   };
@@ -106,28 +24,17 @@ const Home: NextPage = () => {
     getData();
   }, []);
   let sortInfo, topInfo, btmInfo;
-  sortInfo = _.reverse(_.sortBy(dummy, "menuDate"));
-  topInfo = _.slice(sortInfo, 0, 3);
-  btmInfo = _.slice(sortInfo, 3, sortInfo.length);
-  console.info("topInfo", btmInfo, topInfo);
+  // sortInfo = _.reverse(_.sortBy(dummy, "menuDate"));
+  // topInfo = _.slice(menuData, 0, 3);
+  topInfo = menuData;
+  // btmInfo = _.slice(sortInfo, 3, sortInfo.length);
+  // console.info("topInfo", topInfo);
   return (
     <Layout home siteTitle="main">
       <div className="main-top">
-        {/* {topInfo.map((row, idx) => {
-          return (
-            <ListItem
-              imgSrc={row.imgSrc}
-              imgWidth={row.imgWidth}
-              imgHeight={row.imgHeight}
-              menuNm={row.menuNm}
-              menuDate={row.menuDate}
-              menuId={row.menuId}
-              menuTag={row.menuTag}
-              isHome={true}
-              key={idx}
-            />
-          );
-        })} */}
+        {topInfo.map((row, idx) => {
+          return <ListItem {...row} key={idx} />;
+        })}
       </div>
       {/* <div className="main-bottom">
         {btmInfo.map((row, idx) => {

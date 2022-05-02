@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Header from "./Header";
+import Footer from "./Footer";
 
 const name = "Your Name";
 // export const siteTitle = "MMER Test Site";
@@ -48,6 +49,7 @@ const Layout = (props: any) => {
       </Head>
       <Header />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 };

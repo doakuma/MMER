@@ -25,6 +25,15 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <nav className="menu-util">
+        <ul>
+          <li>
+            <Link href="/recipe/recipeRegist">
+              <a className="btn-util">Add Menu</a>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };

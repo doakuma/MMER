@@ -8,14 +8,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const RecipeList = () => {
-  let url = "/api/mock/recipeList";
+  let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
     axios
       .get(url)
       .then((res) => {
-        let resData = _.get(res, "data.result.data");
-        setMenuData(resData);
+        setMenuData(_.get(res, "data.result.list"));
       })
       .catch((err) => {
         console.log("error", err);
@@ -31,7 +30,7 @@ const RecipeList = () => {
         <div className="cont-list">
           {!_.isEmpty(menuData) &&
             menuData.map((row, idx) => {
-              return <ListItem listData={row} key={idx} />;
+              return <ListItem {...row} key={idx} />;
             })}
         </div>
         {/* <Link href="/recipe/recipeDetail">
