@@ -113,7 +113,6 @@ function RecipeModify() {
       }
       return item;
     });
-    console.log("newIngr", newIngr);
     setIngrList(newIngr);
   };
   const onChangeCook = (e: any) => {

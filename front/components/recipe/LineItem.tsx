@@ -73,12 +73,22 @@ const ingrLine = (props: any) => {
   );
 };
 const cookLine = (props: any) => {
-  const { cookDesc, onClick, onChange, lineKey } = props;
+  const { cookDesc, onClick, onChange, lineKey, seqType } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor="cookDesc">
         {lineKey + 1}
       </label>
+      <select
+        name="seqType"
+        className="text"
+        onChange={onChange}
+        id={`cook-${lineKey}-type`}
+      >
+        <option value="재료">재료</option>
+        <option value="양념">양념</option>
+        <option value="조리">조리</option>
+      </select>
       <textarea
         className="text"
         name="cookDesc"

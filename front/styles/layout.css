@@ -530,7 +530,8 @@
   grid-template-columns: 20% 1fr;
 }
 .regist.regist_cookseq li {
-  grid-template-columns: 5% 1fr 5%;
+  column-gap: 5px;
+  grid-template-columns: 0.05fr 1fr 6fr 0.025fr;
 }
 .regist.regist_cookseq li .tit-regist {
   display: flex;

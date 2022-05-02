@@ -9,13 +9,13 @@ const ListDetailRecipeInfo = (props: any) => {
   useEffect(() => {
     // return result;
     let arrIngr: any = _.filter(props, (o) => {
-      return _.get(o, "seqType") === "재료손질";
+      return _.get(o, "seqType") === "재료";
     });
     let arrSrc: any = _.filter(props, (o) => {
-      return _.get(o, "seqType") === "양념준비";
+      return _.get(o, "seqType") === "양념";
     });
     let cookSeeq: any = _.filter(props, (o) => {
-      return _.get(o, "seqType") === "조리순서";
+      return _.get(o, "seqType") === "조리";
     });
     setSeqIngr(arrIngr);
     setSeqSrc(arrSrc);
