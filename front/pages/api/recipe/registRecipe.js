@@ -68,9 +68,7 @@ export default async function handler(req, res) {
           values: [_insertId, row.ingrName, row.ingrType, row.ingrAmt],
         });
       });
-      console.log("rsIngr", _.get(result, "insertId"), rsIngr);
       await cookList.map(async (row, idx) => {
-        console.log("cookList", row);
         const rsCook = await excuteQuery({
           query: `
             INSERT

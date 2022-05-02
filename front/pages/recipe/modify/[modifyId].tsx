@@ -28,22 +28,24 @@ export interface IModify {
 }
 function recipeModify() {
   const { query, pathname } = useRouter();
-  const [menuData, setMenuData] = useState({});
-  const [menuIngr, setMenuIngr] = useState([]);
-  const [recipeData, setRecipeData] = useState([]);
+  const [inputs, setInputs] = useState({});
+  const [menuInfo, setMenuInfo] = useState({});
+  const [ingrList, setIngrList] = useState([]);
+  const [seqList, setSeqList] = useState([]);
   let _geturl = `/api/recipe/getRecipe`;
   let params = {
     id: _.get(query, "modifyId"),
   };
-  console.log("props", params, query);
   const getData = async () => {
     await axios
       .get(_geturl, { params })
       .then((res) => {
         let resData = _.get(res, "data.result.data");
-        setMenuData(_.get(resData, "menuInfo"));
-        setMenuIngr(_.get(resData, "ingrList"));
-        setRecipeData(_.get(resData, "seqList"));
+        console.log("resData", resData);
+        setInputs(resData);
+        setMenuInfo(_.get(resData, "menuInfo"));
+        setIngrList(_.get(resData, "ingrList"));
+        setSeqList(_.get(resData, "seqList"));
       })
       .catch((err) => {
         console.log("error", err);
@@ -53,67 +55,38 @@ function recipeModify() {
     if (params.id) getData();
   }, [params.id]);
 
-  useEffect(() => {
-    setInputs(initparams);
-  }, [menuData]);
-  useEffect(() => {
-    setInputs((prev) => {
-      return {
-        ...prev,
-        ingrList: menuIngr,
-        cookList: recipeData,
-      };
-    });
-  }, [menuIngr, recipeData]);
-
-  useEffect(() => {
-    if (_.isEmpty(menuIngr)) return;
-    menuIngr.map((row, idx) => {
-      _.set(row, "lineType", "lineIngr");
-    });
-  }, [menuIngr]);
-  useEffect(() => {
-    if (_.isEmpty(recipeData)) return;
-    recipeData.map((row, idx) => {
-      _.set(row, "lineType", "lineCook");
-    });
-    console.log("recipeData");
-  }, [recipeData]);
-
   let url = `/api/recipe/registRecipe`;
   let modurl = `/api/recipe/modifyRecipe`;
   let initparams = {
-    imgSrc: _.get(menuData, "imgSrc"),
-    imgWidth: _.get(menuData, "imgWidth"),
-    imgHeight: _.get(menuData, "imgHeight"),
-    menuNm: _.get(menuData, "menuNm"),
-    mealType: _.get(menuData, "mealType"),
-    lastCookDate: _.get(menuData, "lastCookDate"),
-    menuDifct: _.get(menuData, "menuDifct"),
-    menuReqTime: _.get(menuData, "menuReqTime"),
-    userInfo: _.get(menuData, "userInfo"),
-    menuTag: _.get(menuData, "menuTag"),
-    id: _.get(menuData, "id"),
-    ingrList: menuIngr,
-    cookList: recipeData,
+    imgSrc: _.get(menuInfo, "imgSrc"),
+    imgWidth: _.get(menuInfo, "imgWidth"),
+    imgHeight: _.get(menuInfo, "imgHeight"),
+    menuNm: _.get(menuInfo, "menuNm"),
+    mealType: _.get(menuInfo, "mealType"),
+    lastCookDate: _.get(menuInfo, "lastCookDate"),
+    menuDifct: _.get(menuInfo, "menuDifct"),
+    menuReqTime: _.get(menuInfo, "menuReqTime"),
+    userInfo: _.get(menuInfo, "userInfo"),
+    menuTag: _.get(menuInfo, "menuTag"),
+    id: _.get(menuInfo, "id"),
+    ingrList: _.get(inputs, "ingrList"),
+    cookList: _.get(inputs, "seqList"),
   };
   let ingrParams = {
-    lineType: "lineIngr",
     ingrName: "",
     ingrType: "",
     ingrAmt: "",
+    ingrFreq: null,
+    menuId: params.id,
   };
   let cookParams = {
-    lineType: "lineCook",
     cookDesc: "",
     cookImg: "",
     cookImgAlt: "",
     seqType: "",
     cookSeq: 0,
+    menuId: params.id,
   };
-  const [inputs, setInputs] = useState({});
-  const [lineIngr, setLineIngr] = useState([ingrParams]); // 재료 라인 배열
-  const [lineCook, setLineCook] = useState([cookParams]); // 조리 라인 배열
   const modifyData = async (e: any) => {
     await axios
       .post(modurl, { inputs })
@@ -127,62 +100,64 @@ function recipeModify() {
 
   const onChange = (e: any) => {
     const { value, name } = e.target;
-    setInputs({
-      ...inputs,
+    setMenuInfo({
+      ...menuInfo,
       [name]: value,
     });
   };
   const onChangeIngr = (e: any) => {
     const { value, name, id } = e.target;
-    const newIngr = lineIngr.map((item, idx) => {
+    const newIngr = ingrList.map((item: any, idx: number) => {
       if (_.includes(id, idx)) {
         return { ...item, [name]: value };
       }
       return item;
     });
-    setLineIngr(newIngr);
+    console.log("newIngr", newIngr);
+    setIngrList(newIngr);
   };
   const onChangeCook = (e: any) => {
     const { value, name, id } = e.target;
-    const newCook = lineCook.map((item, idx) => {
+    const newCook = seqList.map((item: any, idx: number) => {
       if (_.includes(id, idx)) {
         return { ...item, [name]: value };
       }
       return item;
     });
-    setLineCook(newCook);
+    setSeqList(newCook);
   };
 
   const addLine = (type: any) => {
     console.log("type", type);
     if (type === "addIngr") {
-      setLineIngr((prev) => [...prev, ingrParams]);
+      setIngrList((prev) => [...prev, ingrParams]);
     } else {
-      setLineCook((prev) => [...prev, cookParams]);
+      setSeqList((prev) => [...prev, cookParams]);
     }
   };
   const onReset = () => {
-    setInputs(params);
+    console.log("initparams", initparams);
+    // setInputs(initparams);
   };
 
   useEffect(() => {
     setInputs((prev) => {
       return {
         ...prev,
-        ingrList: lineIngr,
-        cookList: lineCook,
+        menuInfo: menuInfo,
+        ingrList: ingrList,
+        seqList: seqList,
       };
     });
-  }, [lineIngr, lineCook]);
+  }, [menuInfo, ingrList, seqList]);
 
   return (
     <Layout home={false} siteTitle="recipe details">
       <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
+        <NavSeq />
         <div className="regist regist_info">
           <h2 className="stit-recipe">메뉴 기본 정보</h2>
-
-          <NavSeq />
 
           <ul className="list-regist">
             <li>
@@ -195,7 +170,7 @@ function recipeModify() {
                 id="imgSrc"
                 name="imgSrc"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "imgSrc")}
+                defaultValue={_.get(menuInfo, "imgSrc")}
               />
             </li>
             <li>
@@ -208,7 +183,7 @@ function recipeModify() {
                 id="imgWidth"
                 name="imgWidth"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "imgWidth")}
+                defaultValue={_.get(menuInfo, "imgWidth")}
               />
             </li>
             <li>
@@ -221,7 +196,7 @@ function recipeModify() {
                 id="imgHeight"
                 name="imgHeight"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "imgHeight")}
+                defaultValue={_.get(menuInfo, "imgHeight")}
               />
             </li>
             <li>
@@ -234,7 +209,7 @@ function recipeModify() {
                 id="menuNm"
                 name="menuNm"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "menuNm")}
+                defaultValue={_.get(menuInfo, "menuNm")}
               />
             </li>
             <li>
@@ -247,7 +222,7 @@ function recipeModify() {
                 id="mealType"
                 name="mealType"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "mealType")}
+                defaultValue={_.get(menuInfo, "mealType")}
               />
             </li>
             <li>
@@ -260,7 +235,7 @@ function recipeModify() {
                 id="lastCookDate"
                 name="lastCookDate"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "lastCookDate")}
+                defaultValue={_.get(menuInfo, "lastCookDate")}
               />
             </li>
             <li>
@@ -273,7 +248,7 @@ function recipeModify() {
                 id="menuDifct"
                 name="menuDifct"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "menuDifct")}
+                defaultValue={_.get(menuInfo, "menuDifct")}
               />
             </li>
             <li>
@@ -286,7 +261,7 @@ function recipeModify() {
                 id="menuReqTime"
                 name="menuReqTime"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "menuReqTime")}
+                defaultValue={_.get(menuInfo, "menuReqTime")}
               />
             </li>
             <li>
@@ -299,7 +274,7 @@ function recipeModify() {
                 id="userInfo"
                 name="userInfo"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "userInfo")}
+                defaultValue={_.get(menuInfo, "userInfo")}
               />
             </li>
             <li>
@@ -312,40 +287,51 @@ function recipeModify() {
                 id="menuTag"
                 name="menuTag"
                 onChange={onChange}
-                defaultValue={_.get(menuData, "menuTag")}
+                defaultValue={_.get(menuInfo, "menuTag")}
               />
             </li>
           </ul>
         </div>
         <div className="regist regist_ingredient">
-          <h2 className="stit-recipe">재료</h2>
+          <h2 className="stit-recipe">
+            재료
+            <button className="btn-add" onClick={() => addLine("addIngr")}>
+              재료 추가
+            </button>
+          </h2>
           <ul className="list-regist">
-            {menuIngr.map((item, idx) => {
-              console.log("lineIngr", item);
-              return (
-                <LineItem
-                  onClick={() => addLine("addIngr")}
-                  onChange={(e) => onChangeIngr(e)}
-                  {...item}
-                  key={idx}
-                  lineKey={idx}
-                />
-              );
-            })}
+            {!_.isEmpty(ingrList) &&
+              ingrList.map((item: any, idx: number) => {
+                return (
+                  <LineItem
+                    onClick={() => addLine("addIngr")}
+                    onChange={(e) => onChangeIngr(e)}
+                    {...{ ...item, lineType: "lineIngr" }}
+                    key={idx}
+                    lineKey={idx}
+                  />
+                );
+              })}
           </ul>
         </div>
         <div className="regist regist_cookseq">
-          <h2 className="stit-recipe">조리</h2>
+          <h2 className="stit-recipe">
+            조리
+            <button className="btn-add" onClick={() => addLine("addCook")}>
+              재료 추가
+            </button>
+          </h2>
           <ul className="list-regist">
-            {recipeData.map((item, idx) => (
-              <LineItem
-                onClick={() => addLine("addCook")}
-                onChange={(e) => onChangeCook(e)}
-                {...item}
-                key={idx}
-                lineKey={idx}
-              />
-            ))}
+            {!_.isEmpty(seqList) &&
+              seqList.map((item: any, idx: number) => (
+                <LineItem
+                  onClick={() => addLine("addCook")}
+                  onChange={(e) => onChangeCook(e)}
+                  {...{ ...item, lineType: "lineCook" }}
+                  key={idx}
+                  lineKey={idx}
+                />
+              ))}
           </ul>
         </div>
         <div className="btn-area md">

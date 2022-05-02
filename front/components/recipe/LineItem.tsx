@@ -21,7 +21,6 @@ export interface ILineItem {
 
 const LineItem = (listData: ILineItem) => {
   const { lineType } = listData;
-  console.log("lineType", lineType);
   if (lineType === "lineIngr") {
     return ingrLine({ ...listData });
   } else {
