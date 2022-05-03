@@ -39,7 +39,7 @@ const drawSeq = (type: any) => {
           type.map((row: any, idx: number) => {
             return (
               <div className="detial-line" key={idx}>
-                <span className="detail-order">{row.cookSeq}</span>
+                <span className="detail-order">{idx + 1}</span>
                 <div className="detial-cont">
                   <span className="cont-text">{row.cookDesc}</span>
                   {!_.isEmpty(row.cookImg) && (

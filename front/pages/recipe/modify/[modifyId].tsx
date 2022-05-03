@@ -83,8 +83,7 @@ function RecipeModify() {
     cookDesc: "",
     cookImg: "",
     cookImgAlt: "",
-    seqType: "",
-    cookSeq: 0,
+    seqType: "재료",
     menuId: params.id,
   };
   const modifyData = async (e: any) => {
@@ -107,7 +106,7 @@ function RecipeModify() {
   };
   const onChangeIngr = (e: any) => {
     const { value, name, id } = e.target;
-    const newIngr = ingrList.map((item: any, idx: number) => {
+    const newIngr: any = ingrList.map((item: any, idx: number) => {
       if (_.includes(id, idx)) {
         return { ...item, [name]: value };
       }
@@ -117,7 +116,7 @@ function RecipeModify() {
   };
   const onChangeCook = (e: any) => {
     const { value, name, id } = e.target;
-    const newCook = seqList.map((item: any, idx: number) => {
+    const newCook: any = seqList.map((item: any, idx: number) => {
       if (_.includes(id, idx)) {
         return { ...item, [name]: value };
       }
@@ -127,7 +126,6 @@ function RecipeModify() {
   };
 
   const addLine = (type: any) => {
-    console.log("type", type);
     if (type === "addIngr") {
       setIngrList((prev) => [...prev, ingrParams]);
     } else {
@@ -159,6 +157,32 @@ function RecipeModify() {
           <h2 className="stit-recipe">메뉴 기본 정보</h2>
 
           <ul className="list-regist">
+            <li>
+              <label className="tit-regist" htmlFor="menuNm">
+                메뉴 이름
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="menuNm"
+                name="menuNm"
+                onChange={onChange}
+                defaultValue={_.get(menuInfo, "menuNm")}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="mealType">
+                메뉴 종류
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="mealType"
+                name="mealType"
+                onChange={onChange}
+                defaultValue={_.get(menuInfo, "mealType")}
+              />
+            </li>
             <li>
               <label className="tit-regist" htmlFor="imgSrc">
                 이미지 경로
@@ -196,32 +220,6 @@ function RecipeModify() {
                 name="imgHeight"
                 onChange={onChange}
                 defaultValue={_.get(menuInfo, "imgHeight")}
-              />
-            </li>
-            <li>
-              <label className="tit-regist" htmlFor="menuNm">
-                메뉴 이름
-              </label>
-              <input
-                className="text"
-                type="text"
-                id="menuNm"
-                name="menuNm"
-                onChange={onChange}
-                defaultValue={_.get(menuInfo, "menuNm")}
-              />
-            </li>
-            <li>
-              <label className="tit-regist" htmlFor="mealType">
-                메뉴 종류
-              </label>
-              <input
-                className="text"
-                type="text"
-                id="mealType"
-                name="mealType"
-                onChange={onChange}
-                defaultValue={_.get(menuInfo, "mealType")}
               />
             </li>
             <li>

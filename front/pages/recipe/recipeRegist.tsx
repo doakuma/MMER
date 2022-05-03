@@ -69,8 +69,7 @@ function RecipeModify() {
     cookDesc: "",
     cookImg: "",
     cookImgAlt: "",
-    seqType: "",
-    cookSeq: 0,
+    seqType: "재료",
   };
 
   const [inputs, setInputs] = useState(params); // 기본정보 입력
@@ -161,12 +160,35 @@ function RecipeModify() {
     <Layout home={false} siteTitle="recipe details">
       <Head>{/* <title>{siteTitle}</title> */}</Head>
       <section className="cont-section">
+        <NavSeq />
         <div className="regist regist_info">
           <h2 className="stit-recipe">메뉴 기본 정보</h2>
 
-          <NavSeq />
-
           <ul className="list-regist">
+            <li>
+              <label className="tit-regist" htmlFor="menuNm">
+                메뉴 이름
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="menuNm"
+                name="menuNm"
+                onChange={onChange}
+              />
+            </li>
+            <li>
+              <label className="tit-regist" htmlFor="mealType">
+                메뉴 종류
+              </label>
+              <input
+                className="text"
+                type="text"
+                id="mealType"
+                name="mealType"
+                onChange={onChange}
+              />
+            </li>
             <li>
               <label className="tit-regist" htmlFor="imgSrc">
                 이미지 경로
@@ -200,30 +222,6 @@ function RecipeModify() {
                 type="text"
                 id="imgHeight"
                 name="imgHeight"
-                onChange={onChange}
-              />
-            </li>
-            <li>
-              <label className="tit-regist" htmlFor="menuNm">
-                메뉴 이름
-              </label>
-              <input
-                className="text"
-                type="text"
-                id="menuNm"
-                name="menuNm"
-                onChange={onChange}
-              />
-            </li>
-            <li>
-              <label className="tit-regist" htmlFor="mealType">
-                메뉴 종류
-              </label>
-              <input
-                className="text"
-                type="text"
-                id="mealType"
-                name="mealType"
                 onChange={onChange}
               />
             </li>

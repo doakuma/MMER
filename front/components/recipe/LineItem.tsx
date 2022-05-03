@@ -29,7 +29,7 @@ const LineItem = (listData: ILineItem) => {
 };
 
 const ingrLine = (props: any) => {
-  const { ingrName, ingrAmt, onClick, onChange, lineKey } = props;
+  const { ingrType, ingrName, ingrAmt, onClick, onChange, lineKey } = props;
   return (
     <li>
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-type`}>
@@ -40,9 +40,10 @@ const ingrLine = (props: any) => {
         className="text"
         onChange={onChange}
         id={`ingr-${lineKey}-type`}
+        defaultValue={ingrType}
       >
-        <option value="">주재료</option>
-        <option value="">양념</option>
+        <option value="주재료">주재료</option>
+        <option value="양념">양념</option>
       </select>
       <label className="tit-regist" htmlFor={`ingr-${lineKey}-name`}>
         재료 명
@@ -84,6 +85,7 @@ const cookLine = (props: any) => {
         className="text"
         onChange={onChange}
         id={`cook-${lineKey}-type`}
+        defaultValue={seqType}
       >
         <option value="재료">재료</option>
         <option value="양념">양념</option>
