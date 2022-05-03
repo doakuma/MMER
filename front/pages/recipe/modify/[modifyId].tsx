@@ -41,7 +41,6 @@ function RecipeModify() {
       .get(_geturl, { params })
       .then((res) => {
         let resData = _.get(res, "data.result.data");
-        console.log("resData", resData);
         setInputs(resData);
         setMenuInfo(_.get(resData, "menuInfo"));
         setIngrList(_.get(resData, "ingrList"));
@@ -63,7 +62,9 @@ function RecipeModify() {
     imgHeight: _.get(menuInfo, "imgHeight"),
     menuNm: _.get(menuInfo, "menuNm"),
     mealType: _.get(menuInfo, "mealType"),
-    lastCookDate: _.get(menuInfo, "lastCookDate"),
+    lastCookDate:
+      _.get(menuInfo, "lastCookDate") &&
+      _.get(menuInfo, "lastCookDate").split("T")[0],
     menuDifct: _.get(menuInfo, "menuDifct"),
     menuReqTime: _.get(menuInfo, "menuReqTime"),
     userInfo: _.get(menuInfo, "userInfo"),
@@ -99,9 +100,10 @@ function RecipeModify() {
 
   const onChange = (e: any) => {
     const { value, name } = e.target;
+    let _value = name === "lastCookDate" ? value.split("T")[0] : value;
     setMenuInfo({
       ...menuInfo,
-      [name]: value,
+      [name]: _value,
     });
   };
   const onChangeIngr = (e: any) => {
@@ -232,7 +234,10 @@ function RecipeModify() {
                 id="lastCookDate"
                 name="lastCookDate"
                 onChange={onChange}
-                defaultValue={_.get(menuInfo, "lastCookDate")}
+                defaultValue={
+                  _.get(menuInfo, "lastCookDate") &&
+                  _.get(menuInfo, "lastCookDate").split("T")[0]
+                }
               />
             </li>
             <li>
