@@ -8,7 +8,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ListItem from "../components/recipe/ListItem";
 
-const Home: NextPage = () => {
+export const getStaticProps = async () => {
+  let url = "http://localhost:3000/api/recipe/getRecipeList";
+  // try {
+  const res = await axios.get(url);
+  // .catch((e) => console.info("axios error=>", e.message));
+  console.log("getStaticProps", res.data);
+  return {
+    props: { res: res.data },
+    revalidate: 1,
+  };
+  // } catch (err) {
+  //   console.info("error=>", err.message);
+  //   return {
+  //     props: {},
+  //     revalidate: 1,
+  //   };
+  // }
+};
+
+const Home: NextPage = (props) => {
   let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
