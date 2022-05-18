@@ -13,18 +13,11 @@ export const getStaticProps = async () => {
   // try {
   const res = await axios.get(url);
   // .catch((e) => console.info("axios error=>", e.message));
-  console.log("getStaticProps", res.data);
+  let data = _.get(res, "data.result.list");
   return {
-    props: { res: res.data },
+    props: { data },
     revalidate: 1,
   };
-  // } catch (err) {
-  //   console.info("error=>", err.message);
-  //   return {
-  //     props: {},
-  //     revalidate: 1,
-  //   };
-  // }
 };
 
 const Home: NextPage = (props) => {
@@ -40,7 +33,9 @@ const Home: NextPage = (props) => {
       .catch((err) => {});
   };
   useEffect(() => {
-    getData();
+    console.log("props", props);
+    // getData();
+    setMenuData(_.get(props, "data"));
   }, []);
   let sortInfo, topInfo, btmInfo;
   // sortInfo = _.reverse(_.sortBy(dummy, "menuDate"));
@@ -51,9 +46,10 @@ const Home: NextPage = (props) => {
   return (
     <Layout home siteTitle="main">
       <div className="main-top">
-        {topInfo.map((row, idx) => {
-          return <ListItem {...row} key={idx} />;
-        })}
+        {!_.isEmpty(menuData) &&
+          menuData.map((row, idx) => {
+            return <ListItem {...row} key={idx} />;
+          })}
       </div>
       {/* <div className="main-bottom">
         {btmInfo.map((row, idx) => {
