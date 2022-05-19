@@ -742,6 +742,7 @@
   margin: 0 0 0 -10px;
 }
 .icon-priends {
+  position: relative;
   overflow: hidden;
   display: block;
   border: 2px solid #3f454f;
@@ -751,7 +752,8 @@
   border-radius: 50%;
   background: #fff;
   transform: scale(1);
-  transition: transform, background-color 0.5s;
+  transition: all 0.15s;
+  z-index: 1;
 }
 .icon-priends img {
   display: block;
@@ -762,6 +764,7 @@
 .icon-priends:hover {
   background: #f0d616;
   transform: scale(1.2);
+  z-index: 2;
 }
 .icon-priends.more {
   position: relative;
