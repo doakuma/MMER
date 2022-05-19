@@ -10,7 +10,7 @@ import ListDetaiIngrInfo from "../../components/recipe/ListDetaiIngrInfo";
 import ListDetailRecipeInfo from "../../components/recipe/ListDetailRecipeInfo";
 import _ from "lodash";
 
-function RecipeDetail() {
+const RecipeDetail = (props: any) => {
   const { query, pathname } = useRouter();
   const router = useRouter();
   const [menuData, setMenuData] = useState({});
@@ -22,7 +22,6 @@ function RecipeDetail() {
     id: query.menuId,
   };
 
-  console.log("props", params);
   const getData = async () => {
     await axios
       .get(url, { params })
@@ -37,7 +36,7 @@ function RecipeDetail() {
         console.log("error", err);
       });
   };
-  const removeData = async (e) => {
+  const removeData = async (e: any) => {
     e.preventDefault();
     await axios
       .post(removeUrl, { params })
@@ -51,9 +50,15 @@ function RecipeDetail() {
         console.log("err", err);
       });
   };
+  // useEffect(() => {
+  //   if (params.id) getData();
+  // }, [params.id]);
+
   useEffect(() => {
-    if (params.id) getData();
-  }, [params.id]);
+    setMenuData(_.get(props, "menuData.menuInfo"));
+    setMenuIngr(_.get(props, "menuData.ingrList"));
+    setRecipeData(_.get(props, "menuData.seqList"));
+  }, []);
 
   return (
     <Layout home={false} siteTitle="recipe details">
@@ -82,5 +87,37 @@ function RecipeDetail() {
       </section>
     </Layout>
   );
-}
+};
 export default RecipeDetail;
+
+export const getStaticProps = async (context: any) => {
+  const {
+    params: { menuId },
+  } = context;
+  console.log("getStaticProps", context);
+  let url = "http://localhost:3000/api/recipe/getRecipe";
+  const res = await axios.get(url, { params: { id: menuId } });
+  const data = _.get(res, "data.result.data");
+  console.log("getStaticProps", data);
+  return {
+    props: {
+      menuData: data,
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  let url = "http://localhost:3000/api/recipe/getRecipeList";
+  const res = await axios.get(url);
+  const data = _.get(res, "data.result.list");
+  const paths = data.map((menu: any) => ({
+    params: {
+      menuId: menu.id + "",
+    },
+  }));
+  console.log("getStaticPaths", paths);
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};

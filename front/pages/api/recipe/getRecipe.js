@@ -6,11 +6,11 @@ import _ from "lodash";
 export default async function handler(req, res) {
   if (req.method !== "GET") res.status(405);
   const { id } = req.query;
-  console.log(
-    "req==============================================================",
-    req.query,
-    id
-  );
+  // console.log(
+  //   "req==============================================================",
+  //   req.query,
+  //   id
+  // );
   let arrIngr = [];
   let arrSrc = [];
   let cookSeeq = [];
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     });
     // arrSrc
     // cookSeeq
-    console.log("props", ingrResult);
+    // console.log("props", ingrResult);
     _.set(props, "result.data.menuInfo", result[0]);
     _.set(props, "result.data.seqList", recipeResult);
     // _.set(props, "result.data.seqList.seqIngr", arrIngr);
