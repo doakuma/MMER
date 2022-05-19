@@ -32,6 +32,11 @@ const Header = () => {
               <a className="btn-util">Add Menu</a>
             </Link>
           </li>
+          <li>
+            <Link href="/user">
+              <a className="btn-util">User</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
