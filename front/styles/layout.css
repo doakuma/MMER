@@ -585,3 +585,91 @@
   width: 2px;
   height: 20px;
 }
+/* User Style */
+.cont-section.userInfo {
+  padding: 10px 0 0;
+  border-top: 1px solid #3f454f;
+}
+.tit-user {
+  margin: 10px 0 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+.img-user {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0;
+}
+.img-user .userImg {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 10px;
+  border: 2px solid #3f454f;
+}
+.user-summary {
+  position: relative;
+  margin: 20px 0 0 50px;
+  padding: 30px;
+  border: 2px solid #3f454f;
+  border-radius: 10px;
+  background: #fff;
+}
+.user-summary:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #3f454f;
+  border-radius: 10px;
+  transform: translate(15px, 15px) rotate(1deg);
+  z-index: -1;
+}
+.summ-tit {
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px 0;
+  font-size: 40px;
+  font-weight: bold;
+}
+.summ-tit:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 0;
+  bottom: 0;
+  height: 15px;
+  width: 100%;
+  background: rgba(240, 214, 22, 0.6);
+  transform: rotate(-1deg);
+}
+.summ-intro {
+  padding: 10px 15px 20px;
+  margin: 10px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.list-userTag {
+  width: 100%;
+}
+.list-userTag {
+  display: flex;
+  margin: 20px 0 0;
+}
+.btn-userTag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background: #f0d616;
+  border: 2px solid #3f454f;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #3f454f;
+  font-size: 18px;
+}
