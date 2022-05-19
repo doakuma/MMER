@@ -4,7 +4,7 @@
 .header {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #e4e8ef;
+  border-bottom: 2px solid #3f454f;
 }
 .footer {
   padding: 40px 0;
@@ -701,19 +701,36 @@
   flex-wrap: wrap;
 }
 .list-favor li {
-  overflow: hidden;
+  position: relative;
   margin: 10px 15px;
-  padding: 0 0 10px;
   width: 130px;
   border: 2px solid #3f454f;
   border-radius: 5px;
   background: #fff;
+  z-index: 1;
+}
+.list-favor li:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #3f454f;
+  border-radius: 10px;
+  transform: translate(5px, 5px) rotate(1deg);
+  z-index: -1;
 }
 .list-favor li:nth-child(odd) {
   transform: rotate(1.5deg);
 }
 .list-favor li:nth-child(even) {
   transform: rotate(-1.5deg);
+}
+.list-favor dl {
+  padding: 0 0 10px;
+  background: #fff;
 }
 .list-favor dt {
   padding: 5px 10px;
