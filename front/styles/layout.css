@@ -587,6 +587,7 @@
 }
 /* User Style */
 .cont-section.userInfo {
+  position: relative;
   padding: 30px 0;
   border-top: 1px solid #3f454f;
 }
@@ -648,7 +649,7 @@
   height: 15px;
   width: 100%;
   background: rgba(240, 214, 22, 0.4);
-  transform: rotate(-1deg);
+  transform: rotate(-1deg) skewX(-20deg);
 }
 .summ-intro {
   padding: 10px 15px 20px;
@@ -675,6 +676,62 @@
   font-weight: bold;
   color: #3f454f;
   font-size: 18px;
+}
+.list-userSocial {
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 50px;
+}
+.list-userSocial li {
+  margin: 0 0 0 5px;
+}
+.btn-userSocial {
+  overflow: hidden;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  background: #3f454f;
+  font-size: 0;
+  line-height: 0;
+}
+.list-favor {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-favor li {
+  overflow: hidden;
+  margin: 10px 15px;
+  padding: 0 0 10px;
+  width: 130px;
+  border: 2px solid #3f454f;
+  border-radius: 5px;
+  background: #fff;
+}
+.list-favor li:nth-child(odd) {
+  transform: rotate(1.5deg);
+}
+.list-favor li:nth-child(even) {
+  transform: rotate(-1.5deg);
+}
+.list-favor dt {
+  padding: 5px 10px;
+  height: 36px;
+  font-size: 24px;
+  background: #f0d616;
+  border-bottom: 1px solid #3f454f;
+}
+.list-favor dd {
+  overflow: hidden;
+  padding: 5px 10px;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-height: 1.1em;
+  height: 4.8em;
 }
 .list-priends {
   display: flex;
