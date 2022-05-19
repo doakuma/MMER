@@ -594,6 +594,19 @@
 .cont-section.userInfo:first-of-type {
   border: none;
 }
+.head-userInfo {
+  display: flex;
+  align-items: center;
+}
+.btn-userSet {
+  margin: 0 0 0 10px;
+  width: 40px;
+  height: 40px;
+  background: #3f454f;
+  border-radius: 50%;
+  font-size: 0;
+  line-height: 0;
+}
 .tit-user {
   margin: 10px 0 20px;
   font-size: 40px;

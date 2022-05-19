@@ -4,7 +4,12 @@ const User = () => {
   return (
     <Layout home={false} siteTitle="MMER | User">
       <section className="cont-section userInfo">
-        <h3 className="tit-user">User Info</h3>
+        <header className="head-userInfo">
+          <h3 className="tit-user">User Info</h3>
+          <a href="" className="btn-userSet">
+            Setting
+          </a>
+        </header>
         <figure className="img-user">
           <img src="/images/user/@userImage.png" alt="" className="userImg" />
           <figcaption>
@@ -165,9 +170,6 @@ const User = () => {
             <a href="" className="icon-priends more"></a>
           </li>
         </ul>
-      </section>
-      <section className="cont-section userInfo">
-        <h3 className="tit-user">Settings</h3>
       </section>
       <section className="cont-section userInfo">
         <h3 className="tit-user">Notifications</h3>
