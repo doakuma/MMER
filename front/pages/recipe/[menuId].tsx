@@ -94,11 +94,11 @@ export const getStaticProps = async (context: any) => {
   const {
     params: { menuId },
   } = context;
-  console.log("getStaticProps", context);
+  // console.log("getStaticProps", context);
   let url = "http://localhost:3000/api/recipe/getRecipe";
   const res = await axios.get(url, { params: { id: menuId } });
   const data = _.get(res, "data.result.data");
-  console.log("getStaticProps", data);
+  // console.log("getStaticProps", data);
   return {
     props: {
       menuData: data,
@@ -115,7 +115,7 @@ export const getStaticPaths = async () => {
       menuId: menu.id + "",
     },
   }));
-  console.log("getStaticPaths", paths);
+  // console.log("getStaticPaths", paths);
   return {
     paths,
     fallback: "blocking",

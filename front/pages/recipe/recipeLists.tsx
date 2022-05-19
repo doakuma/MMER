@@ -7,7 +7,7 @@ import _ from "lodash";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const RecipeList = () => {
+const RecipeList = (props: any) => {
   let url = "/api/recipe/getRecipeList";
   const [menuData, setMenuData] = useState([]);
   const getData = () => {
@@ -21,7 +21,8 @@ const RecipeList = () => {
       });
   };
   useEffect(() => {
-    getData();
+    // getData();
+    setMenuData(_.get(props, "data"));
   }, []);
 
   return (
@@ -41,3 +42,15 @@ const RecipeList = () => {
   );
 };
 export default RecipeList;
+
+export const getStaticProps = async () => {
+  let url = "http://localhost:3000/api/recipe/getRecipeList";
+  // try {
+  const res = await axios.get(url);
+  // .catch((e) => console.info("axios error=>", e.message));
+  let data = _.get(res, "data.result.list");
+  return {
+    props: { data },
+    revalidate: 1,
+  };
+};
