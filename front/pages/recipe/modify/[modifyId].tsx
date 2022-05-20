@@ -340,7 +340,7 @@ function RecipeModify() {
           <button className="btn primary" onClick={(e) => modifyData(e)}>
             메뉴 수정
           </button>
-          <button className="btn primary" onClick={onReset}>
+          <button className="btn" onClick={onReset}>
             취소
           </button>
         </div>

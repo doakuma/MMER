@@ -80,7 +80,7 @@ const RecipeDetail = (props: any) => {
           <Link href={`/recipe/modify/${params.id}`}>
             <a className="btn primary">메뉴 수정</a>
           </Link>
-          <button onClick={(e) => removeData(e)} className="btn primary">
+          <button onClick={(e) => removeData(e)} className="btn">
             메뉴 삭제
           </button>
         </div>
