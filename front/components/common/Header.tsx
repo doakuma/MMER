@@ -6,8 +6,8 @@ const Header = () => {
     <header className="header">
       <Link href="/">
         <a>
-          <h1>
-            <Image src="/images/logo.png" width={150} height={150} alt="MMER" />
+          <h1 className="tit-logo">
+            <img src="/images/logo.svg" alt="MMER" />
           </h1>
         </a>
       </Link>

@@ -6,6 +6,17 @@
   align-items: center;
   border-bottom: 2px solid #3f454f;
 }
+.tit-logo {
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+  box-sizing: border-box;
+}
+.tit-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .footer {
   padding: 40px 0;
   margin: 80px 0 0;
@@ -33,7 +44,7 @@
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.75);
+  border: 2px solid #3f454f;
 }
 .list-item dt {
   position: relative;
@@ -44,6 +55,7 @@
   display: block;
   overflow: hidden;
   height: 300px;
+  border-bottom: 2px solid #3f454f;
 }
 .list-item dt img {
   transition: all 0.35s;
@@ -75,7 +87,7 @@
 }
 .list-tag li {
   padding: 0 5px;
-  color: #171b22;
+  color: #3f454f;
 }
 .item-difc {
   display: flex;
@@ -103,6 +115,7 @@
   left: 0;
   right: 0;
   margin: auto;
+  border: 3px solid #3f454f;
 }
 
 .cont-detail {
@@ -375,32 +388,38 @@
 }
 .btn-gnb {
   position: relative;
-  margin: 0 10px;
+  margin: 0 0 0 20px;
   padding: 10px;
+  height: 40px;
   font-size: 20px;
   font-weight: bold;
-  transition: color 0.15s;
+  border-radius: 2px;
+  border: 2px solid #3f454f;
+  transition: all 0.15s;
+  background: #e4e8ef;
 }
 .btn-gnb:after {
   content: "";
+  display: block;
   position: absolute;
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: -10px;
-  margin: auto;
-  background: #f0d616;
-  width: 0;
-  height: 6px;
-  transition: width 0.15s;
+  border: 2px solid #3f454f;
+  border-radius: 2px;
+  transition: all 0.15s;
+  transform: translate(0, 0) rotate(0);
+  z-index: -1;
 }
 .btn-gnb:hover,
 .btn-gnb.active {
-  color: #f0d616;
+  background: #f0d616;
 }
 
 .btn-gnb:hover:after,
 .btn-gnb.active:after {
-  width: 100%;
+  transform: translate(7px, 7px) rotate(1.25deg);
 }
 
 /* util */
@@ -419,11 +438,30 @@
   margin-right: 0;
 }
 .btn-util {
-  padding: 5px 10px;
-  border-radius: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  height: 40px;
   background: #f0d616;
-  color: #fff;
+  color: #3f454f;
   font-weight: bold;
+  border-radius: 2px;
+  border: 2px solid #3f454f;
+}
+.btn-util:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #3f454f;
+  border-radius: 2px;
+  transform: translate(5px, 5px) rotate(1deg);
+  z-index: -1;
 }
 
 /* regist */
