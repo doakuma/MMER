@@ -1,5 +1,5 @@
 {
-  "name": "front",
+  "name": "MMER",
   "private": true,
   "scripts": {
     "dev": "next dev",

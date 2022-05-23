@@ -1,57 +1,20 @@
-import Layout from "../../components/common/Layout";
+import dynamic from "next/dynamic";
 import _ from "lodash";
 import Link from "next/link";
-import "froala-editor/js/froala_editor.pkgd.min.js";
-
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
 
 // import "font-awesome/css/font-awesome.css";
 
-import FroalaEditor from "react-froala-wysiwyg";
 import { useState } from "react";
 
-const UserInfo = ({
-  userName = "doakuma",
-  userId = "0001",
-  userIntro = "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  userTag = [
-    {
-      tagName: "주말요리",
-      tagId: "tag001",
-    },
-    {
-      tagName: "파릐타임",
-      tagId: "tag002",
-    },
-    {
-      tagName: "tag3",
-      tagId: "tag003",
-    },
-    {
-      tagName: "tag4",
-      tagId: "tag004",
-    },
-  ],
-  userSns = [
-    {
-      snsType: "google",
-      snsLink: "",
-    },
-    {
-      snsType: "instagram",
-      snsLink: "",
-    },
-    {
-      snsType: "facebook",
-      snsLink: "https://www.facebook.com/doakuma",
-    },
-    {
-      snsType: "twitter",
-      snsLink: "",
-    },
-  ],
-}) => {
+const FroalaEditor = dynamic(
+  () => import("../../components/common/FroalaEditor"),
+  {
+    ssr: false,
+  }
+);
+
+const UserInfo = (userInfo: any) => {
+  const { userName, userId, userIntro, userTag, userSns } = userInfo;
   const [urIntro, setUrIntro] = useState(userIntro);
   const handleChange = (e: any) => {
     console.log("handleChange", e);
@@ -78,8 +41,8 @@ const UserInfo = ({
               <FroalaEditor
                 tag="textarea"
                 config={config}
-                model={urIntro}
-                onModelChange={handleChange}
+                model={"니가 그렇게 싸움을 잘해?!!"}
+                // onModelChange={handleChange}
               />
             </dd>
           </dl>
@@ -91,7 +54,7 @@ const UserInfo = ({
       </figure>
       <ul className="list-userTag">
         {!_.isEmpty(userTag) &&
-          userTag.map((row) => {
+          userTag.map((row: any) => {
             return (
               <li key={row.tagId}>
                 <Link href={`/search/${row.tagId}`}>
@@ -103,7 +66,7 @@ const UserInfo = ({
       </ul>
       <ul className="list-userSocial">
         {!_.isEmpty(userSns) &&
-          userSns.map((row, idx) => {
+          userSns.map((row: any, idx: any) => {
             return (
               <li key={idx}>
                 <Link href={row.snsLink}>
@@ -119,5 +82,4 @@ const UserInfo = ({
     </section>
   );
 };
-
 export default UserInfo;
