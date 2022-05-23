@@ -40,25 +40,26 @@ const UserInfo = () => {
       <ul className="list-userSocial">
         <li>
           <a href="" className="btn-userSocial">
-            <i />
-            facebook
+            <i className="icon-google" />
+            google
           </a>
         </li>
         <li>
           <a href="" className="btn-userSocial">
-            <i />
+            <i className="icon-instagram" />
             instgrams
           </a>
         </li>
         <li>
           <a href="" className="btn-userSocial">
-            <i />
-            twitter
+            <i className="icon-facebook" />
+            facebook
           </a>
         </li>
         <li>
           <a href="" className="btn-userSocial">
-            <i />
+            <i className="icon-twitter" />
+            twitter
           </a>
         </li>
       </ul>

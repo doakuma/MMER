@@ -726,13 +726,15 @@
   margin: 0 0 0 10px;
   width: 40px;
   height: 40px;
-  background: #3f454f;
+  background: url("/images/common/icons/icon_setting.svg") no-repeat center
+    center;
+  background-size: contain;
   border-radius: 50%;
   font-size: 0;
   line-height: 0;
 }
 .tit-user {
-  margin: 10px 0 20px;
+  margin: 10px 0;
   font-size: 40px;
   font-weight: bold;
 }
@@ -825,13 +827,69 @@
 }
 .btn-userSocial {
   overflow: hidden;
-  display: block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  background: #3f454f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3f454f;
   font-size: 0;
   line-height: 0;
+  border: 2px solid #3f454f;
+}
+.btn-userSocial i {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-size: 25px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.btn-userSocial .icon-whatsapp {
+  background-image: url("/images/common/icons/icon_whatsapp.svg");
+}
+.btn-userSocial .icon-google {
+  background-image: url("/images/common/icons/icon_google.svg");
+}
+.btn-userSocial .icon-spotify {
+  background-image: url("/images/common/icons/icon_spotify.svg");
+}
+.btn-userSocial .icon-paper-plane {
+  background-image: url("/images/common/icons/icon_paper-plane.svg");
+}
+.btn-userSocial .icon-discord {
+  background-image: url("/images/common/icons/icon_discord.svg");
+}
+.btn-userSocial .icon-codepen {
+  background-image: url("/images/common/icons/icon_codepen.svg");
+}
+.btn-userSocial .icon-behance {
+  background-image: url("/images/common/icons/icon_behance.svg");
+}
+.btn-userSocial .icon-mailchimp {
+  background-image: url("/images/common/icons/icon_mailchimp.svg");
+}
+.btn-userSocial .icon-airbnb {
+  background-image: url("/images/common/icons/icon_airbnb.svg");
+}
+.btn-userSocial .icon-twitter {
+  background-image: url("/images/common/icons/icon_twitter.svg");
+}
+.btn-userSocial .icon-reddit {
+  background-image: url("/images/common/icons/icon_reddit.svg");
+}
+.btn-userSocial .icon-linkedin-in {
+  background-image: url("/images/common/icons/icon_linkedin-in.svg");
+}
+.btn-userSocial .icon-facebook-messenger {
+  background-image: url("/images/common/icons/icon_facebook-messenger.svg");
+}
+.btn-userSocial .icon-facebook {
+  background-image: url("/images/common/icons/icon_facebook.svg");
+}
+.btn-userSocial .icon-instagram {
+  background-image: url("/images/common/icons/icon_instagram.svg");
 }
 .list-favor {
   display: flex;
