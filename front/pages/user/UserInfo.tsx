@@ -21,6 +21,15 @@ const UserInfo = () => {
               doloribus quisquam.
             </dd>
           </dl>
+          <div className="imgUpload">
+            <input
+              type="file"
+              id="imgUpload"
+              name="imgUpload"
+              className="file"
+            />
+            <label htmlFor="imgUpload" className="btnUpload"></label>
+          </div>
         </figcaption>
       </figure>
       <ul className="list-userTag">
