@@ -1,6 +1,15 @@
 import Layout from "../../components/common/Layout";
 import _ from "lodash";
 import Link from "next/link";
+import "froala-editor/js/froala_editor.pkgd.min.js";
+
+import "froala-editor/css/froala_style.min.css";
+import "froala-editor/css/froala_editor.pkgd.min.css";
+
+// import "font-awesome/css/font-awesome.css";
+
+import FroalaEditor from "react-froala-wysiwyg";
+import { useState } from "react";
 
 const UserInfo = ({
   userName = "doakuma",
@@ -43,11 +52,20 @@ const UserInfo = ({
     },
   ],
 }) => {
+  const [urIntro, setUrIntro] = useState(userIntro);
+  const handleChange = (e: any) => {
+    console.log("handleChange", e);
+    setUrIntro(e);
+  };
+  const config = {
+    placeholder: "Edit Your Content Here!",
+    charCounterCount: false,
+  };
   return (
     <section className="cont-section userInfo">
       <header className="head-userInfo">
         <h3 className="tit-user">User Info</h3>
-        <Link href="/userSetting">
+        <Link href="/settings">
           <a className="btn-userSet">Setting</a>
         </Link>
       </header>
@@ -56,7 +74,14 @@ const UserInfo = ({
         <figcaption className="user-summary">
           <dl>
             <dt className="summ-tit">{userName}</dt>
-            <dd className="summ-intro">{userIntro}</dd>
+            <dd className="summ-intro">
+              <FroalaEditor
+                tag="textarea"
+                config={config}
+                model={urIntro}
+                onModelChange={handleChange}
+              />
+            </dd>
           </dl>
         </figcaption>
         <div className="imgUpload">
