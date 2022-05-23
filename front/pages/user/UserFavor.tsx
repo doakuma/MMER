@@ -31,7 +31,7 @@ const UserFavor = ({
         {!_.isEmpty(favorData) &&
           favorData.map((row, idx) => {
             return (
-              <li>
+              <li key={idx}>
                 <dl>
                   <dt>
                     <Link href={`/search/${row.favorTit}`}>
