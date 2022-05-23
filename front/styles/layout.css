@@ -759,6 +759,7 @@
   border: 2px solid #3f454f;
   border-radius: 10px;
   background: #fff;
+  width: calc(100% - 330px);
 }
 .user-summary:after {
   content: "";
