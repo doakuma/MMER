@@ -6,7 +6,6 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 import FroalaEditor from "react-froala-wysiwyg";
 const MyFroalaEditor = (props: any) => {
   const { config, tag, model } = props;
-  console.log("props", config);
   return <FroalaEditor config={config} tag={tag} model={model} />;
 };
 export default MyFroalaEditor;

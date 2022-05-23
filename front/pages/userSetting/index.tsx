@@ -1,4 +1,5 @@
 import _ from "lodash";
+import Link from "next/link";
 import { useState } from "react";
 import Layout from "../../components/common/Layout";
 import UserFavor from "./UserFavor";
@@ -51,25 +52,22 @@ const data = {
 };
 const UserSetting = () => {
   // const [urIntro, setUrIntro] = useState(userIntro);
+  const modifyData = (e: any) => {
+    e.preventDefault();
+  };
   const introChange = () => {};
   return (
     <Layout home={false} siteTitle="MMER | userSetting">
-      <UserInfo userInfo={_.get(data, "userInfo")} />
+      <UserInfo {..._.get(data, "userInfo")} />
       <UserFavor />
       <section className="cont-section userInfo">
         <div className="btn-area md">
-          <button
-            className="btn primary"
-            // onClick={(e) => modifyData(e)}
-          >
+          <button className="btn primary" onClick={(e) => modifyData(e)}>
             수정
           </button>
-          <button
-            className="btn"
-            //  onClick={onReset}
-          >
-            취소
-          </button>
+          <Link href="/user">
+            <a className="btn">취소</a>
+          </Link>
         </div>
       </section>
     </Layout>
