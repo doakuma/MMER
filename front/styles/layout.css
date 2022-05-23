@@ -1073,6 +1073,10 @@
   font-size: 18px;
   font-weight: bold;
 }
+.link-notification {
+  font-weight: bold;
+  color: var(--color-black);
+}
 .imgUpload {
   overflow: hidden;
   position: relative;
