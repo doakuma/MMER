@@ -812,14 +812,18 @@
   width: 100%;
 }
 .list-userTag {
+  position: relative;
   display: flex;
   margin: 20px 0 0;
+}
+.list-userTag li {
+  position: relative;
+  margin: 0 5px;
 }
 .btn-userTag {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 5px;
   padding: 5px 10px;
   background: var(--color-yellow);
   border: 2px solid var(--color-black);
@@ -827,6 +831,44 @@
   font-weight: bold;
   color: var(--color-black);
   font-size: 18px;
+}
+.list-userTag.modify .btn-userTag {
+  padding-right: 30px;
+}
+.btn-delTag {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  line-height: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-delTag:before,
+.btn-delTag:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: var(--color-black);
+  transform: rotate(45deg);
+}
+.btn-delTag:before {
+  width: 10px;
+  height: 2px;
+}
+.btn-delTag:after {
+  width: 2px;
+  height: 10px;
 }
 .list-userSocial {
   display: flex;
@@ -1128,4 +1170,9 @@
   position: absolute;
   left: 230px;
   top: 230px;
+}
+.box-tagInput {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 0;
 }
