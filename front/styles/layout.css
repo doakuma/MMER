@@ -1223,3 +1223,10 @@
   margin: 0 0 15px;
   color: var(--color-black);
 }
+.btn-area.hasAccount {
+  flex-direction: column;
+}
+.hasAccount .txt-signUp {
+  margin: 0 0 20px;
+  font-size: 20px;
+}

@@ -37,6 +37,11 @@ const Header = () => {
               <a className="btn-util">User</a>
             </Link>
           </li>
+          <li>
+            <Link href="/signUp">
+              <a className="btn-util">Sign Up</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
