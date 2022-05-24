@@ -75,9 +75,9 @@ const signUp = () => {
             >
               Sign Up
             </button>
-            <button type="button" className="btn">
-              Cancel
-            </button>
+            <Link href="/">
+              <a className="btn">Cancel</a>
+            </Link>
           </div>
           <div className="btn-area md hasAccount">
             <p className="txt-signUp ">Do you have account?</p>
