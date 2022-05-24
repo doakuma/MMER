@@ -86,8 +86,8 @@ const UserInfo = (props: any) => {
         </button>
       </div>
       <ul className="list-userTag modify">
-        {!_.isEmpty(userTag) &&
-          userTag.map((row: any) => {
+        {!_.isEmpty(urTag) &&
+          urTag.map((row: any) => {
             return (
               <li key={row.tagId}>
                 <Link href={`/search/${row.tagId}`}>
