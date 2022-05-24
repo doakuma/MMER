@@ -2,47 +2,8 @@ import Layout from "../../components/common/Layout";
 import _ from "lodash";
 import Link from "next/link";
 
-const UserInfo = ({
-  userName = "doakuma",
-  userId = "0001",
-  userIntro = "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-  userTag = [
-    {
-      tagName: "주말요리",
-      tagId: "tag001",
-    },
-    {
-      tagName: "파릐타임",
-      tagId: "tag002",
-    },
-    {
-      tagName: "tag3",
-      tagId: "tag003",
-    },
-    {
-      tagName: "tag4",
-      tagId: "tag004",
-    },
-  ],
-  userSns = [
-    {
-      snsType: "google",
-      snsLink: "",
-    },
-    {
-      snsType: "instagram",
-      snsLink: "",
-    },
-    {
-      snsType: "facebook",
-      snsLink: "https://www.facebook.com/doakuma",
-    },
-    {
-      snsType: "twitter",
-      snsLink: "",
-    },
-  ],
-}) => {
+const UserInfo = (props: any) => {
+  const { userName, userId, userIntro, userTag, userSns } = props;
   return (
     <section className="cont-section userInfo">
       <header className="head-userInfo">
