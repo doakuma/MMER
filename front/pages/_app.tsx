@@ -2,9 +2,17 @@ import "../styles/globals.css";
 import "../styles/layout.css";
 
 import type { AppProps } from "next/app";
+import { UserProvider, UseUserState } from "./context/UserContext";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const isSignIn = false;
+  // const { user } = UseUserState();
+  // console.log("user", useUserState());
+  return (
+    <UserProvider>
+      <Component {...pageProps} />
+    </UserProvider>
+  );
+};
 
 export default MyApp;

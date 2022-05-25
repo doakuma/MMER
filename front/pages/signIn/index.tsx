@@ -1,7 +1,9 @@
 import axios from "axios";
+import _ from "lodash";
 import Link from "next/link";
 import { useState } from "react";
 import Layout from "../../components/common/Layout";
+import { UseUserDispatch, UseUserState } from "../context/UserContext";
 
 const signInUser = async (credential: any) => {
   let url = `/api/user/signIn`;
@@ -16,6 +18,8 @@ const signInUser = async (credential: any) => {
 };
 
 const signIn = () => {
+  const { userList } = UseUserState();
+  const dispatch = UseUserDispatch();
   const initSgInfo = {
     userMail: "",
     userPw: "",
@@ -34,6 +38,10 @@ const signIn = () => {
   };
   const signIn = async () => {
     const response = await signInUser(sgInfo);
+    dispatch({
+      type: "SIGNIN",
+      userMail: _.get(sgInfo, "userMail"),
+    });
 
     console.log("response", response);
   };
@@ -75,7 +83,7 @@ const signIn = () => {
             <button
               type="button"
               className="btn primary"
-              onClick={handleConfirm}
+              onClick={(e) => handleConfirm(e)}
             >
               Sign In
             </button>
