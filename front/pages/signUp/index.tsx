@@ -1,17 +1,30 @@
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 import Layout from "../../components/common/Layout";
 
+const signInUser = async (credential: any) => {
+  let url = `/api/user/signUp`;
+  let _headers = {
+    "Content-Type": "application/json",
+  };
+  let _body = JSON.stringify(credential);
+  return await axios.post(url, {
+    headers: _headers,
+    body: _body,
+  });
+};
 const signUp = () => {
   const initSgInfo = {
-    sgEmail: "",
-    sgIpPw: "",
+    userMail: "",
+    userPw: "",
     sgCfPw: "",
   };
   const [sgInfo, setSgInfo] = useState(initSgInfo);
   const handleConfirm = (e: any) => {
     e.preventDefault();
     console.log("sgInfo", sgInfo);
+    signUn();
   };
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -19,6 +32,11 @@ const signUp = () => {
       ...prev,
       [name]: value,
     }));
+  };
+  const signUn = async () => {
+    const response = await signInUser(sgInfo);
+
+    console.log("response", response);
   };
   return (
     <Layout home={false} siteTitle="MMER | SignUp">
@@ -29,27 +47,27 @@ const signUp = () => {
             <p className="txt-signUp">Dolce Far Niente!!!</p>
           </header>
           <div className="line-signUp">
-            <label className="label" htmlFor="sgEmail">
+            <label className="label" htmlFor="userMail">
               E-mail
             </label>
             <input
               type="email"
               className="text"
-              name="sgEmail"
-              id="sgEmail"
+              name="userMail"
+              id="userMail"
               placeholder="Enter your email address"
               onChange={handleChange}
             />
           </div>
           <div className="line-signUp">
-            <label className="label" htmlFor="sgIpPw">
+            <label className="label" htmlFor="userPw">
               Input Password
             </label>
             <input
               type="password"
               className="text"
-              name="sgIpPw"
-              id="sgIpPw"
+              name="userPw"
+              id="userPw"
               placeholder="Enter Password"
               onChange={handleChange}
             />
