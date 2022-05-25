@@ -51,11 +51,6 @@ export default async function handler(req, res) {
     // cookSeeq
     // console.log("props", ingrResult);
     _.set(props, "result.data.userInfo", result[0]);
-    // _.set(props, "result.data.seqList", recipeResult);
-    // _.set(props, "result.data.seqList.seqIngr", arrIngr);
-    // _.set(props, "result.data.seqList.seqSrc", arrSrc);
-    // _.set(props, "result.data.seqList.seqCook", cookSeeq);
-    // _.set(props, "result.data.ingrList", ingrResult);
   } catch (error) {
     console.log(error);
   }
