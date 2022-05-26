@@ -39,7 +39,7 @@ const signIn = () => {
   const signIn = async () => {
     const response = await signInUser(sgInfo);
     dispatch({
-      type: "SIGNIN",
+      type: "GET_USER",
       userMail: _.get(sgInfo, "userMail"),
     });
 

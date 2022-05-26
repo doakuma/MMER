@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import "../styles/layout.css";
 
 import type { AppProps } from "next/app";
-import { UserProvider, UseUserState } from "./context/UserContext";
+import { UserProvider } from "./context/UserContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const isSignIn = false;

@@ -6,12 +6,25 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const name = "Your Name";
+import {
+  UseUserState,
+  UseUserDispatch,
+  getUser,
+} from "../../pages/context/UserContext";
+import { useEffect, useState } from "react";
 // export const siteTitle = "MMER Test Site";
-
+let id = "1";
 const Layout = (props: any) => {
+  const [userId, setUserId] = useState(null);
+  const state = UseUserState();
+  const dispatch = UseUserDispatch();
+
   let children = props.children;
   let home = props.home;
   let siteTitle = props.siteTitle;
+  useEffect(() => {
+    getUser(dispatch, id);
+  }, [dispatch, id]);
   return (
     <div className="wrapper">
       <Head>

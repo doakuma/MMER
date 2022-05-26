@@ -1,33 +1,71 @@
 import React, { createContext, useContext, useReducer } from "react";
+import axios from "axios";
 
 const initialState = {
-  userList: [],
-  user: null,
+  userList: {
+    loading: false,
+    data: null,
+    error: null,
+  },
+  user: {
+    loading: false,
+    data: null,
+    error: null,
+  },
 };
+
+const loadingState = {
+  lodaing: true,
+  data: null,
+  error: null,
+};
+
+const success = (data) => ({
+  lodaing: false,
+  data,
+  error: null,
+});
+
+const error = (e) => ({
+  loading: false,
+  data: null,
+  error: e,
+});
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "CREATE_USER":
+    case "GET_USERS":
       return {
         ...state,
-        userList: state.userList.concat(action.user),
+        userList: lodaingState,
       };
-    case "SIGNIN":
+    case "GET_USERS_SUCCESS":
       return {
         ...state,
-        user: {
-          userId: action.userId,
-          userName: action.userName,
-          userMail: action.userMail,
-        },
+        userList: success(action.data),
       };
-    case "SIGNOUT":
+    case "GET_USERS_ERROR":
       return {
         ...state,
-        user: null,
+        userList: error(action.error),
+      };
+    case "GET_USER":
+      return {
+        ...state,
+        user: lodaingState,
+      };
+    case "GET_USER_SUCCESS":
+      return {
+        ...state,
+        user: success(action.data),
+      };
+    case "GET_USER_ERROR":
+      return {
+        ...state,
+        user: error(action.error),
       };
     default:
-      return state;
+      throw new Error(`Unhandled action type :  ${error}`);
   }
 };
 
@@ -36,7 +74,6 @@ const UserDispatchContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("userProvider", state);
   return (
     <UserStateContext.Provider value={state}>
       <UserDispatchContext.Provider value={dispatch}>
@@ -56,4 +93,23 @@ export const UseUserDispatch = () => {
   const dispatch = useContext(UserDispatchContext);
   if (!dispatch) throw new Error("Cannot find UserProvider");
   return dispatch;
+};
+
+export const getUsers = async (dispatch) => {
+  const res = await axios.get("/api/user/getUser");
+  try {
+    dispatch({ type: "GET_USERS_SUCCESS", data: response.data });
+  } catch (e) {
+    dispatch({ type: "GET_USERS_ERROR", error: e });
+  }
+};
+
+export const getUser = async (dispatch, id) => {
+  let params = { id: id };
+  const res = await axios.get(`/api/user/getUser/`, { params });
+  try {
+    dispatch({ type: "GET_USER_SUCCESS", data: response.data });
+  } catch (e) {
+    dispatch({ type: "GET_USER_ERROR", error: e });
+  }
 };
